@@ -3,81 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio - Stanley Salim</title>
+    <title>Stanley Salim - Portfolio</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <script src="scripts.js" defer></script>
 </head>
 <body>
     <header>
         <nav>
             <ul>
-                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#skills">Skills</a></li>
                 <li><a href="#projects">Projects</a></li>
-                <li><a href="#experience">Experience</a></li>
                 <li><a href="#contact">Contact</a></li>
-                <li><a href="https://www.linkedin.com/in/your-linkedin-username" target="_blank">LinkedIn</a></li>
             </ul>
         </nav>
     </header>
-
-    <section id="home" data-aos="fade-up">
+    <section id="hero">
         <h1>Stanley Salim</h1>
-        <p>Welcome to my portfolio website</p>
+        <p>Lifelong Math Voyager</p>
     </section>
-
-    <section id="projects" data-aos="fade-up">
+    <section id="about" class="container">
+        <h2>About Me</h2>
+        <img src="images/profile.jpg" alt="Picture of Stanley" class="profile-img">
+        <p>I'm Stanley Salim, a mathematician, educator, and Python programmer with a passion for teaching and learning. I love exploring new places and enjoy playing chess and reading books in my free time.</p>
+    </section>
+    <section id="skills" class="container">
+        <h2>Skills</h2>
+        <div class="skills-grid">
+            <div class="skill">Mathematics</div>
+            <div class="skill">Python Programming</div>
+            <div class="skill">Teaching</div>
+            <div class="skill">Data Science</div>
+            <div class="skill">Chess</div>
+            <div class="skill">Traveling</div>
+        </div>
+    </section>
+    <section id="projects" class="container">
         <h2>Projects</h2>
-        <div class="project">
-            <h3>Project Title 1</h3>
-            <p>Description of the project.</p>
+        <div class="projects-grid">
+            <div class="project" onclick="openLightbox('https://via.placeholder.com/700x400', 'Description of project 1.')">
+                <h3>Project 1</h3>
+                <p>Description of project 1.</p>
+            </div>
+            <div class="project" onclick="openLightbox('https://via.placeholder.com/700x400', 'Description of project 2.')">
+                <h3>Project 2</h3>
+                <p>Description of project 2.</p>
+            </div>
+            <div class="project" onclick="openLightbox('https://via.placeholder.com/700x400', 'Description of project 3.')">
+                <h3>Project 3</h3>
+                <p>Description of project 3.</p>
+            </div>
         </div>
-        <div class="project">
-            <h3>Project Title 2</h3>
-            <p>Description of the project.</p>
-        </div>
-        <!-- Add more projects as needed -->
     </section>
-
-    <section id="experience" data-aos="fade-up">
-        <h2>Experience</h2>
-        <div class="experience">
-            <h3>Job Title 1</h3>
-            <p>Company Name - Date</p>
-            <p>Brief description of your role and responsibilities.</p>
-        </div>
-        <div class="experience">
-            <h3>Job Title 2</h3>
-            <p>Company Name - Date</p>
-            <p>Brief description of your role and responsibilities.</p>
-        </div>
-        <!-- Add more experiences as needed -->
-    </section>
-
-    <section id="contact" data-aos="fade-up">
+    <section id="contact" class="container">
         <h2>Contact</h2>
-        <form action="mailto:stanley.salim@hotmail.com" method="post" enctype="text/plain">
-            <label for="name">Name:</label>
+        <form id="contact-form">
+            <label for="name">Name</label>
             <input type="text" id="name" name="name" required>
-            <label for="email">Email:</label>
+            <label for="email">Email</label>
             <input type="email" id="email" name="email" required>
-            <label for="message">Message:</label>
+            <label for="message">Message</label>
             <textarea id="message" name="message" required></textarea>
             <button type="submit">Send</button>
         </form>
-        <p>Or connect with me on <a href="https://www.linkedin.com/in/salimstnl" target="_blank">LinkedIn</a>.</p>
-        <!--
-        <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
-        <div class="badge-base LI-profile-badge" data-locale="en_US" data-size="medium" data-theme="dark" data-type="VERTICAL" data-vanity="salimstnl" data-version="v1"><a class="badge-base__link LI-simple-link" href="https://hu.linkedin.com/in/salimstnl?trk=profile-badge">Stanley Salim</a></div>
-        -->
     </section>
-
     <footer>
         <p>&copy; 2024 Stanley Salim. All rights reserved.</p>
+        <img src="images/icon_nobg.png" alt="Icon of Stanley" class="signature-icon">
     </footer>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script>
-        AOS.init();
-    </script>
+    
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox">
+        <span class="close" onclick="closeLightbox()">&times;</span>
+        <img class="lightbox-content" id="lightbox-image">
+        <div id="lightbox-caption"></div>
+    </div>
 </body>
 </html>
