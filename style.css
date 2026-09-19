@@ -312,3 +312,38 @@ footer {
     .about-grid { grid-template-columns: 1fr; }
     .nav-links { display: none; /* Can add hamburger menu later */ }
 }
+
+/* --- Animations --- */
+
+/* Hero Section Load-in */
+.hero-content {
+    animation: fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Scroll Reveal Classes (Triggered by JS) */
+.hidden {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Add a slight staggered delay for project cards so they don't load all at once */
+.project-card:nth-child(1).show { transition-delay: 0.1s; }
+.project-card:nth-child(2).show { transition-delay: 0.2s; }
+.project-card:nth-child(3).show { transition-delay: 0.3s; }
