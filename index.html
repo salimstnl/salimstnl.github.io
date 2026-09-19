@@ -3,12 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stanley Salim</title>
+    <title>Stanley Salim | Mathematician & Founder</title>
+    <!-- Google Fonts: Lora for Academic Serif, Inter for clean Sans-Serif body -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <p>Under maintenance. Please come back later.</p>
+
+    <nav>
+        <div class="nav-content">
+            <a href="#" class="logo">S<sup>2</sup></a>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#projects">Research</a>
+                <a href="#scicomm">SciComm</a>
+                <a href="cv.pdf" target="_blank" class="btn-outline">View CV</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h2 class="subtitle">The most powerful art is the art of learning.</h2>
+            <h1 class="title">Stanley Salim</h1>
+            <p class="roles">Mathematician <span class="divider">|</span> Educator <span class="divider">|</span> Founder</p>
+            
+            <div class="social-links">
+                <a href="https://linkedin.com/in/salimstnl" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://github.com/salimstnl" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://youtube.com/@salimstnl" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a href="mailto:stanley.salim@hotmail.com"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <section id="about" class="section">
+        <div class="container about-grid">
+            <div class="about-text">
+                <h2>Philosophy & Trajectory</h2>
+                <p>From mentoring my peers to coaching top-tier Olympiad (OSN/IMO) talents, I have observed how differently minds process complex logic. This fascination with cognitive mapping led me to found <strong>Vitademy</strong>, an EdTech venture built to leverage the hidden potential within students and professionals.</p>
+                <p>At my core, I am a mathematician. My time at the Budapest University of Technology and Economics (BME) cemented my drive to pursue mathematical physics and theoretical research. My ultimate goal is to bridge these two worlds: translating rigorous pure research into accessible, applied digital platforms that empower human learning.</p>
+                <p class="research-interests"><strong>Research Interests:</strong> Algebraic Geometry, Lie Theory, Fractals, and Mathematical Physics.</p>
+            </div>
+            <div class="about-image">
+                <!-- Replace with a highly professional headshot, no casual backgrounds -->
+                <img src="images/profile.jpeg" alt="Stanley Salim">
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="section bg-darker">
+        <div class="container">
+            <h2>Research & Architecture</h2>
+            <div class="project-grid">
+                
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <i class="fas fa-project-diagram project-icon"></i>
+                    <h3>Vitademy SaaS Architecture</h3>
+                    <p>Architected a data-driven EdTech platform mapping human learning behaviors. Engineered an algorithmic assessment evaluating 5 cognitive dimensions to classify users into 32 distinct learning profiles.</p>
+                    <a href="https://vitademy.space" target="_blank" class="project-link">View Platform &rarr;</a>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <i class="fas fa-square-root-variable project-icon"></i>
+                    <h3>Lie Groups & Algebras</h3>
+                    <p>Conducted rigorous independent research into matrix Lie groups, Lie algebra representations, and exponential maps under the supervision of Dr. Szilárd Szabó (BME/ELTE).</p>
+                    <a href="https://github.com/salimstnl/bme-lietheory" target="_blank" class="project-link">View Codebase &rarr;</a>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card">
+                    <i class="fas fa-network-wired project-icon"></i>
+                    <h3>Fractal Generation</h3>
+                    <p>Programmed recursive fractal generation algorithms (Mandelbrot, Julia sets) in Python and documented interactive Colab notebooks for visual dynamic system analysis.</p>
+                    <a href="https://github.com/salimstnl/bme-fractal" target="_blank" class="project-link">View Codebase &rarr;</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="scicomm" class="section">
+        <div class="container center-text">
+            <h2>Science Communication</h2>
+            <p class="scicomm-desc">Making university-level mathematical physics visually accessible to a global audience.</p>
+            <div class="video-container">
+                <!-- Embed your most popular or highest quality YouTube video here -->
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <a href="https://youtube.com/@salimstnl" target="_blank" class="btn-primary">Explore the Masterclass</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Stanley Salim. All rights reserved.</p>
+    </footer>
+
 </body>
 </html>
