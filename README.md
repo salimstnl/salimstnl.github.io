@@ -1,4 +1,4 @@
 # Stanley's Site
-A personal webpage containing portfolio and shared links of Stanley Salim.
+A personal webpage of Stanley Salim.
 
-&copy; 2024 Stanley Salim
+&copy; 2026 Stanley Salim
