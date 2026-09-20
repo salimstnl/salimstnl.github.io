@@ -4,7 +4,7 @@
     --surface: #1e1e24;
     --text-main: #f3f4f6;
     --text-muted: #a1a1aa;
-    --accent: #C1B1FC; /* Your requested light violet */
+    --accent: #C1B1FC;
     --accent-hover: #a38cf9;
 }
 
@@ -40,6 +40,12 @@ nav {
     border-bottom: 1px solid rgba(255,255,255,0.05);
     z-index: 1000;
     padding: 1.2rem 0;
+}
+
+.nav-logo-img {
+    height: 40px; /* Adjust this value if you want the logo larger/smaller */
+    width: auto;
+    display: block;
 }
 
 .nav-content {
