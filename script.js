@@ -1,8 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    
-    /* ----------------------------------------------------------------------
-       1. Typewriter Title Animation
-       ---------------------------------------------------------------------- */
+    /* 1. Typewriter Title Animation */
     const typeWriterEl = document.getElementById('typewriter');
     if (typeWriterEl) {
         const text = "The most powerful art is that of learning.";
@@ -16,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (!isDeleting && charIndex < text.length) {
                 charIndex++;
-                typingSpeed = 80;
+                typingSpeed = 60; // Slightly faster typing speed
             } else if (isDeleting && charIndex > 0) {
                 charIndex--;
                 typingSpeed = 30; // Erase faster
