@@ -6,22 +6,17 @@
     <title>Stanley Salim</title>
     <meta name="description" content="Personal website of Stanley Salim — Mathematician, Educator, and Founder of Vitademy.">
     
-    <!-- Google Fonts: Inter & Lora -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-    
-    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/png" href="images/logo.png">
 </head>
 <body>
 
-    <!-- Navigation Overlay for Mobile -->
     <div class="nav-overlay" id="navOverlay"></div>
 
-    <!-- Navigation Bar -->
     <nav>
         <div class="nav-content">
             <a href="/" class="logo">
@@ -35,7 +30,6 @@
                 <a href="/blog/">Blog</a>
                 <a href="/publication/">Publication</a>
                 <a href="/about/">About</a>
-                <a href="/docs/cv.pdf" target="_blank" class="btn-outline">View CV</a>
             </div>
 
             <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
@@ -44,20 +38,17 @@
         </div>
     </nav>
 
-    <!-- Hero Section with Feature Carousel -->
+    <!-- Hero Section -->
     <header class="hero">
         <div class="container hero-container">
             <div class="hero-intro">
-                <p class="subtitle">The most powerful art is that of learning.</p>
-                <h1 class="title">Stanley Salim</h1>
-                <p class="roles">Mathematician <span class="divider">|</span> Educator <span class="divider">|</span> Founder</p>
+                <h1 class="title">Welcome</h1>
+                <p class="subtitle typed-text" id="typewriter"></p>
             </div>
 
-            <!-- Spotlight Carousel -->
             <div class="hero-carousel-wrapper">
                 <div class="hero-carousel" id="heroCarousel">
                     
-                    <!-- Slide 1: YouTube Highlight -->
                     <div class="carousel-slide active">
                         <div class="slide-card video-card">
                             <div class="video-responsive">
@@ -70,27 +61,27 @@
                         </div>
                     </div>
 
-                    <!-- Slide 2: Vitademy Startup -->
                     <div class="carousel-slide">
                         <div class="slide-card vitademy-card">
                             <div class="slide-image-wrapper">
-                                <img src="images/vitademy-hero.png" alt="Vitademy Platform Preview" onerror="this.src='https://via.placeholder.com/600x350/1e1e24/C1B1FC?text=Vitademy+SaaS'">
+                                <img src="images/vitademy-hero.png" alt="Vitademy Platform Preview" onerror="this.src='https://via.placeholder.com/600x350/1e1e24/C1B1FC?text=Vitademy'">
                             </div>
                             <div class="slide-caption">
                                 <h3>Discover Your Thinking Style</h3>
-                                <p>Vitademy just launched a free 5-minute test to find out how you learn best.</p>
+                                <p>Vitademy launched a free 5-minute cognitive test.</p>
                                 <a href="https://vitademy.space/" target="_blank" class="btn-primary">Test for FREE &rarr;</a>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Slide 3: Entropi Diaspora Book -->
                     <div class="carousel-slide">
                         <div class="slide-card book-card">
+                            <div class="slide-image-wrapper">
+                                <img src="images/book-entropi.jpg" alt="Entropi Diaspora Book" onerror="this.src='https://via.placeholder.com/600x350/1e1e24/C1B1FC?text=Entropi+Diaspora'">
+                            </div>
                             <div class="slide-caption">
-                                <span class="badge">Published Book</span>
                                 <h3>First Book Launch</h3>
-                                <p>I write about exploring the potential of pure mathematics in Indonesia.</p>
+                                <p>Exploring the potential of pure mathematics in Indonesia.</p>
                                 <a href="https://aramediaindonesia.com/books/3347/" target="_blank" class="btn-primary">Read Now &rarr;</a>
                             </div>
                         </div>
@@ -98,7 +89,6 @@
 
                 </div>
 
-                <!-- Carousel Controls -->
                 <div class="carousel-controls">
                     <button id="carouselPrev" aria-label="Previous slide"><i class="fas fa-chevron-left"></i></button>
                     <div class="carousel-dots" id="carouselDots">
@@ -114,19 +104,15 @@
 
     <div class="section-divider"></div>
 
-    <!-- Section 2: Let's Do Math -->
+    <!-- Math Widget -->
     <section id="math-widget" class="section">
         <div class="container">
             <div class="center-text">
                 <h2 class="section-title">Math of the Day</h2>
-                <p class="section-subtitle">Here is a fun little problem to make your day.</p>
             </div>
-
             <div class="math-card" id="mathCard">
                 <div class="math-question" id="mathQuestionText">Loading question...</div>
-                <div class="math-options" id="mathOptionsGrid">
-                    <!-- Dynamic option buttons rendered via JS -->
-                </div>
+                <div class="math-options" id="mathOptionsGrid"></div>
                 <div class="math-feedback" id="mathFeedback"></div>
             </div>
         </div>
@@ -134,57 +120,55 @@
 
     <div class="section-divider"></div>
 
-    <!-- Section 3: For Learners -->
+    <!-- Courses / Learners -->
     <section id="learners" class="section">
         <div class="container">
-            <div class="section-header">
-                <div>
-                    <h2 class="section-title">Teaching More Than Just Math</h2>
-                    <p class="section-subtitle">Explore all my courses and lecture materials on math and science.</p>
-                </div>
+            <div class="section-header center-text">
+                <h2 class="section-title">Teaching More Than Just Math</h2>
             </div>
 
-            <div class="courses-grid">
-                <!-- Course 1 -->
-                <div class="card course-card">
-                    <div class="card-tag">YouTube</div>
-                    <h3>High School Mathematics</h3>
-                    <p>Comprehensive foundational algebra, calculus, and geometry for secondary students.</p>
+            <div class="visual-grid">
+                <div class="card visual-card">
+                    <img src="https://via.placeholder.com/400x250/1e1e24/C1B1FC?text=High+School+Math" alt="Thumbnail">
+                    <div class="card-content">
+                        <span class="card-tag">YouTube</span>
+                        <h3>High School Mathematics</h3>
+                    </div>
                 </div>
-
-                <!-- Course 2 -->
-                <div class="card course-card">
-                    <div class="card-tag">Olympiad</div>
-                    <h3>OSN Matematika</h3>
-                    <p>Advanced problem-solving strategies for the Indonesian National Science Olympiad.</p>
+                <div class="card visual-card">
+                    <img src="https://via.placeholder.com/400x250/1e1e24/C1B1FC?text=OSN+Matematika" alt="Thumbnail">
+                    <div class="card-content">
+                        <span class="card-tag">Olympiad</span>
+                        <h3>OSN Matematika</h3>
+                    </div>
                 </div>
-
-                <!-- Course 3 -->
-                <div class="card course-card">
-                    <div class="card-tag">Olympiad</div>
-                    <h3>OSN Astronomi</h3>
-                    <p>Astrophysics, celestial mechanics, and spherical trigonometry training.</p>
+                <div class="card visual-card">
+                    <img src="https://via.placeholder.com/400x250/1e1e24/C1B1FC?text=OSN+Astronomi" alt="Thumbnail">
+                    <div class="card-content">
+                        <span class="card-tag">Olympiad</span>
+                        <h3>OSN Astronomi</h3>
+                    </div>
                 </div>
-
-                <!-- Course 4 -->
-                <div class="card course-card">
-                    <div class="card-tag">Language</div>
-                    <h3>IELTS Preparation</h3>
-                    <p>Quantitative strategy for academic writing, reading analysis, and fluent speaking.</p>
+                <div class="card visual-card">
+                    <img src="https://via.placeholder.com/400x250/1e1e24/C1B1FC?text=IELTS" alt="Thumbnail">
+                    <div class="card-content">
+                        <span class="card-tag">Language</span>
+                        <h3>IELTS Preparation</h3>
+                    </div>
                 </div>
-
-                <!-- Course 5 -->
-                <div class="card course-card">
-                    <div class="card-tag">Theory / YT</div>
-                    <h3>Cognitive Dimensions Theory</h3>
-                    <p>Exploring the 5-dimensional framework of human learning and information processing.</p>
+                <div class="card visual-card">
+                    <img src="https://via.placeholder.com/400x250/1e1e24/C1B1FC?text=Cognitive+Dimensions" alt="Thumbnail">
+                    <div class="card-content">
+                        <span class="card-tag">Theory / YT</span>
+                        <h3>Cognitive Dimensions Theory</h3>
+                    </div>
                 </div>
-
-                <!-- Course 6 -->
-                <div class="card course-card">
-                    <div class="card-tag">Cambridge</div>
-                    <h3>Cambridge Mathematics</h3>
-                    <p>IGCSE and A-Level Pure Mathematics, Mechanics, and Probability & Statistics.</p>
+                <div class="card visual-card">
+                    <img src="https://via.placeholder.com/400x250/1e1e24/C1B1FC?text=Cambridge+Math" alt="Thumbnail">
+                    <div class="card-content">
+                        <span class="card-tag">Cambridge</span>
+                        <h3>Cambridge Mathematics</h3>
+                    </div>
                 </div>
             </div>
 
@@ -196,39 +180,34 @@
 
     <div class="section-divider"></div>
 
-    <!-- Section 4: For Readers -->
+    <!-- Blog / Readers -->
     <section id="readers" class="section">
         <div class="container">
-            <div class="section-header">
-                <div>
-                    <h2 class="section-title">The Company of Your Morning Coffee</h2>
-                    <p class="section-subtitle">Read my thoughts on everything from science to life lessons.</p>
-                </div>
+            <div class="section-header center-text">
+                <h2 class="section-title">The Company of Your Morning Coffee</h2>
             </div>
 
-            <div class="blog-carousel-grid">
-                <!-- Blog 1 -->
-                <article class="card blog-card">
-                    <span class="blog-date">December 2021</span>
-                    <h3>Art vs. Science: What Exactly is Mathematics?</h3>
-                    <p>Exploring whether mathematics is a natural science, humanities branch, or pure art form.</p>
-                    <a href="/blog/" class="card-link">Read Article &rarr;</a>
+            <div class="visual-grid">
+                <article class="card visual-card">
+                    <img src="https://via.placeholder.com/400x250/1e1e24/C1B1FC?text=Art+vs+Science" alt="Thumbnail">
+                    <div class="card-content">
+                        <span class="card-tag">Dec 2021 • Philosophy</span>
+                        <h3>Art vs. Science: What Exactly is Mathematics?</h3>
+                    </div>
                 </article>
-
-                <!-- Blog 2 -->
-                <article class="card blog-card">
-                    <span class="blog-date">March 2026</span>
-                    <h3>The Art of Learning Under Constraints</h3>
-                    <p>Why forcing 240 hours of work into a 24-hour day is greed, not ambition.</p>
-                    <a href="/blog/" class="card-link">Read Article &rarr;</a>
+                <article class="card visual-card">
+                    <img src="https://via.placeholder.com/400x250/1e1e24/C1B1FC?text=Under+Constraints" alt="Thumbnail">
+                    <div class="card-content">
+                        <span class="card-tag">Mar 2026 • Workflow</span>
+                        <h3>The Art of Learning Under Constraints</h3>
+                    </div>
                 </article>
-
-                <!-- Blog 3 -->
-                <article class="card blog-card">
-                    <span class="blog-date">August 2026</span>
-                    <h3>Cognitive Mapping & Learning Species</h3>
-                    <p>How evaluating mental profiles transforms educational outcomes for professionals.</p>
-                    <a href="/blog/" class="card-link">Read Article &rarr;</a>
+                <article class="card visual-card">
+                    <img src="https://via.placeholder.com/400x250/1e1e24/C1B1FC?text=Cognitive+Mapping" alt="Thumbnail">
+                    <div class="card-content">
+                        <span class="card-tag">Aug 2026 • Cognitive Science</span>
+                        <h3>Cognitive Mapping & Learning Species</h3>
+                    </div>
                 </article>
             </div>
 
@@ -240,74 +219,78 @@
 
     <div class="section-divider"></div>
 
-    <!-- Section 5: For The Curious (Timeline) -->
+    <!-- Timeline / Curious -->
     <section id="curious" class="section">
         <div class="container">
-            <div class="section-header">
-                <div>
-                    <h2 class="section-title">You've Scrolled Far, Here's More</h2>
-                    <p class="section-subtitle">A chronological journey through my research, projects, and ventures.</p>
-                </div>
+            <div class="section-header center-text">
+                <h2 class="section-title">You've Scrolled Far, Here's More</h2>
             </div>
 
-            <div class="timeline">
-                <!-- Node 1 -->
+            <div class="timeline" id="timeline">
+                <div class="timeline-line"></div>
+                
                 <div class="timeline-item left">
-                    <div class="timeline-content card">
+                    <div class="timeline-content card hover-scale">
+                        <img src="https://via.placeholder.com/400x200/1e1e24/C1B1FC?text=Entropi+Diaspora" class="timeline-img" alt="Book Thumbnail">
                         <span class="timeline-year">2026</span>
                         <h3>Book: "Entropi Diaspora"</h3>
-                        <p>Co-authored book examining diaspora contributions, pure math prestige, and national synergy.</p>
                     </div>
                 </div>
 
-                <!-- Node 2 -->
                 <div class="timeline-item right">
-                    <div class="timeline-content card">
+                    <div class="timeline-content card hover-scale">
+                        <img src="https://via.placeholder.com/400x200/1e1e24/C1B1FC?text=Vitademy" class="timeline-img" alt="Vitademy Thumbnail">
                         <span class="timeline-year">2026</span>
                         <h3>Vitademy SaaS Pivot</h3>
-                        <p>Architected VitaTest and VitaQuant to algorithmically map 32 distinct cognitive profiles.</p>
                     </div>
                 </div>
 
-                <!-- Node 3 -->
                 <div class="timeline-item left">
-                    <div class="timeline-content card">
+                    <div class="timeline-content card hover-scale">
+                        <img src="https://via.placeholder.com/400x200/1e1e24/C1B1FC?text=BSc+Thesis" class="timeline-img" alt="Thesis Thumbnail">
                         <span class="timeline-year">2023</span>
                         <h3>BSc Thesis: Random Matrix Product</h3>
-                        <p>Independent research into numerical calculations of Lyapunov exponents with Prof. Károly Simon at BME.</p>
                     </div>
                 </div>
 
-                <!-- Node 4 -->
                 <div class="timeline-item right">
-                    <div class="timeline-content card">
+                    <div class="timeline-content card hover-scale">
+                        <img src="https://via.placeholder.com/400x200/1e1e24/C1B1FC?text=Fractals" class="timeline-img" alt="Fractal Thumbnail">
                         <span class="timeline-year">2023</span>
                         <h3>Fractal Jupyter Notebook</h3>
-                        <p>Programmed recursive fractal algorithms for complex dynamic system analysis.</p>
                     </div>
                 </div>
 
-                <!-- Node 5 -->
                 <div class="timeline-item left">
-                    <div class="timeline-content card">
+                    <div class="timeline-content card hover-scale">
+                        <img src="https://via.placeholder.com/400x200/1e1e24/C1B1FC?text=Math+Essay" class="timeline-img" alt="Essay Thumbnail">
                         <span class="timeline-year">2021</span>
                         <h3>Mathematics Essay: Art vs. Science</h3>
-                        <p>Undergraduate essay examining the philosophical foundation of mathematical beauty.</p>
-                    </div>
-                </div>
-
-                <!-- Node 6 -->
-                <div class="timeline-item right">
-                    <div class="timeline-content card">
-                        <span class="timeline-year">Active</span>
-                        <h3>YouTube Science Communication</h3>
-                        <p>Producing masterclasses and pedagogical videos on pure mathematics and problem-solving.</p>
                     </div>
                 </div>
             </div>
 
             <div class="center-btn-wrapper">
                 <a href="/publication/" class="btn-primary">More Publications &rarr;</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- About Section -->
+    <section id="about" class="section bg-darker">
+        <div class="container about-container">
+            <div class="about-image hover-glow">
+                <img src="images/profile.jpeg" alt="Stanley Salim" onerror="this.src='https://via.placeholder.com/400x400/1e1e24/C1B1FC?text=Profile'">
+            </div>
+            <div class="about-text">
+                <h2 class="section-title">The Guy Behind All This</h2>
+                <p>The most powerful art is that of learning.</p>
+                <p class="roles">Stanley Salim — Mathematician | Educator | Founder</p>
+                <div class="center-btn-wrapper" style="text-align: left; margin-top: 2rem;">
+                    <a href="/about/" class="btn-primary">More About &rarr;</a>
+                </div>
             </div>
         </div>
     </section>
@@ -321,9 +304,6 @@
                 <a href="https://github.com/salimstnl" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
                 <a href="https://youtube.com/@salimstnl" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
                 <a href="https://instagram.com/salimstnl" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="https://tiktok.com/@salimstnl" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
-                <a href="https://x.com/salimstnl" target="_blank" aria-label="X (Twitter)"><i class="fab fa-x-twitter"></i></a>
-                <a href="https://discord.gg/crkmpnsUzm" target="_blank" aria-label="Vitademy Discord"><i class="fab fa-discord"></i></a>
                 <a href="mailto:stanley.salim@hotmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
             </div>
         </div>
