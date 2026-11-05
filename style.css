@@ -52,6 +52,12 @@ nav { position: fixed; top: 0; width: 100%; background: rgba(10, 10, 10, 0.92); 
 .btn-primary, .btn-outline { display: inline-block; padding: 0.6rem 1.3rem; font-size: 0.85rem; font-weight: 600; border-radius: 6px; text-decoration: none; transition: all 0.3s ease; }
 .btn-primary { background-color: var(--accent); color: var(--bg-darker); border: 1px solid var(--accent); }
 .btn-primary:hover { background-color: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(193,177,252,0.3); }
+.center-btn-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 2rem;
+}
 
 /* Hero Section */
 .hero { min-height: 85vh; padding: 110px 1.5rem 40px 1.5rem; display: flex; align-items: center; background: radial-gradient(circle at 50% 20%, #1a1a24 0%, var(--bg-dark) 80%); }
