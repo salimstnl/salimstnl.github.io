@@ -46,6 +46,7 @@ nav { position: fixed; top: 0; width: 100%; background: rgba(10, 10, 10, 0.92); 
 .nav-links { display: flex; align-items: center; gap: 2rem; }
 .nav-links a { color: var(--text-main); text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
 .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+.hamburger, .nav-close-btn { display: none; }
 
 /* Buttons */
 .btn-primary, .btn-outline { display: inline-block; padding: 0.6rem 1.3rem; font-size: 0.85rem; font-weight: 600; border-radius: 6px; text-decoration: none; transition: all 0.3s ease; }
