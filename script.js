@@ -1,31 +1,68 @@
 document.addEventListener("DOMContentLoaded", () => {
     
     /* ----------------------------------------------------------------------
-       1. Mobile Drawer Navigation Logic
+       1. Typewriter Subtitle Animation
+       ---------------------------------------------------------------------- */
+    const typeWriterEl = document.getElementById('typewriter');
+    if (typeWriterEl) {
+        const text = "The most powerful art is that of learning.";
+        let isDeleting = false;
+        let loopNum = 0;
+        let charIndex = 0;
+        let typingSpeed = 100;
+
+        function type() {
+            const currentText = text.substring(0, charIndex);
+            typeWriterEl.innerHTML = currentText + '<span class="typed-cursor">|</span>';
+
+            if (!isDeleting && charIndex < text.length) {
+                charIndex++;
+                typingSpeed = 80;
+            } else if (isDeleting && charIndex > 0) {
+                charIndex--;
+                typingSpeed = 40;
+            } else if (!isDeleting && charIndex === text.length) {
+                isDeleting = true;
+                typingSpeed = 2000; // Pause at end
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                typingSpeed = 500; // Pause before typing again
+            }
+            setTimeout(type, typingSpeed);
+        }
+        setTimeout(type, 1000);
+    }
+
+    /* ----------------------------------------------------------------------
+       2. Glowing Timeline Scroll Effect
+       ---------------------------------------------------------------------- */
+    const timeline = document.getElementById('timeline');
+    if (timeline) {
+        window.addEventListener('scroll', () => {
+            const rect = timeline.getBoundingClientRect();
+            // Calculate how far we've scrolled past the top of the timeline
+            const scrollPercentage = Math.max(0, Math.min(100, ((window.innerHeight / 2 - rect.top) / rect.height) * 100));
+            timeline.style.setProperty('--scroll-glow', `${scrollPercentage}%`);
+        });
+    }
+
+    /* ----------------------------------------------------------------------
+       3. Mobile Drawer Navigation Logic (Maintained)
        ---------------------------------------------------------------------- */
     const hamburgerBtn = document.getElementById("hamburgerBtn");
     const navCloseBtn = document.getElementById("navCloseBtn");
     const navLinks = document.getElementById("navLinks");
     const navOverlay = document.getElementById("navOverlay");
 
-    function openMenu() {
-        navLinks.classList.add("active");
-        navOverlay.classList.add("active");
-        document.body.style.overflow = "hidden";
-    }
-
-    function closeMenu() {
-        navLinks.classList.remove("active");
-        navOverlay.classList.remove("active");
-        document.body.style.overflow = "auto";
-    }
+    function openMenu() { navLinks.classList.add("active"); navOverlay.classList.add("active"); document.body.style.overflow = "hidden"; }
+    function closeMenu() { navLinks.classList.remove("active"); navOverlay.classList.remove("active"); document.body.style.overflow = "auto"; }
 
     if (hamburgerBtn) hamburgerBtn.addEventListener("click", openMenu);
     if (navCloseBtn) navCloseBtn.addEventListener("click", closeMenu);
     if (navOverlay) navOverlay.addEventListener("click", closeMenu);
 
     /* ----------------------------------------------------------------------
-       2. Hero Section Spotlight Carousel
+       4. Hero Section Spotlight Carousel (Maintained)
        ---------------------------------------------------------------------- */
     const slides = document.querySelectorAll(".carousel-slide");
     const dots = document.querySelectorAll(".dot");
@@ -39,13 +76,8 @@ document.addEventListener("DOMContentLoaded", () => {
         else if (index < 0) currentSlide = slides.length - 1;
         else currentSlide = index;
 
-        slides.forEach((slide, i) => {
-            slide.classList.toggle("active", i === currentSlide);
-        });
-
-        dots.forEach((dot, i) => {
-            dot.classList.toggle("active", i === currentSlide);
-        });
+        slides.forEach((slide, i) => slide.classList.toggle("active", i === currentSlide));
+        dots.forEach((dot, i) => dot.classList.toggle("active", i === currentSlide));
     }
 
     if (nextBtn) nextBtn.addEventListener("click", () => showSlide(currentSlide + 1));
@@ -53,35 +85,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     dots.forEach(dot => {
         dot.addEventListener("click", (e) => {
-            const slideIdx = parseInt(e.target.getAttribute("data-slide"));
-            showSlide(slideIdx);
+            showSlide(parseInt(e.target.getAttribute("data-slide")));
         });
     });
 
     /* ----------------------------------------------------------------------
-       3. "Let's Do Math" Generator Logic
+       5. "Math of the Day" Generator Logic
        ---------------------------------------------------------------------- */
     const mathQuestions = [
-        {
-            q: "What is the derivative of f(x) = x^3 - 4x + 7 with respect to x?",
-            options: ["A) 3x^2 - 4", "B) 3x^2 + 4", "C) x^2 - 4", "D) 3x^3 - 4"],
-            answer: 0
-        },
-        {
-            q: "Which matrix property dictates that det(A * B) = det(A) * det(B)?",
-            options: ["A) Additive property", "B) Multiplicative property", "C) Invertibility rule", "D) Linear combination"],
-            answer: 1
-        },
-        {
-            q: "What is the sum of the roots of x^2 - 7x + 12 = 0?",
-            options: ["A) -7", "B) 12", "C) 7", "D) -12"],
-            answer: 2
-        },
-        {
-            q: "According to the Hairy Ball Theorem, how many vector zeros must exist on a combed 3D sphere?",
-            options: ["A) Exactly zero", "B) At least one", "C) Infinitely many", "D) Exactly four"],
-            answer: 1
-        }
+        { q: "What is the derivative of f(x) = x^3 - 4x + 7 with respect to x?", options: ["3x^2 - 4", "3x^2 + 4", "x^2 - 4", "3x^3 - 4"], answer: 0 },
+        { q: "Which property dictates that det(A * B) = det(A) * det(B)?", options: ["Additive property", "Multiplicative property", "Invertibility rule", "Linear combination"], answer: 1 },
+        { q: "What is the sum of the roots of x^2 - 7x + 12 = 0?", options: ["-7", "12", "7", "-12"], answer: 2 }
     ];
 
     const questionTextEl = document.getElementById("mathQuestionText");
@@ -89,7 +103,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const feedbackEl = document.getElementById("mathFeedback");
 
     if (questionTextEl && optionsGridEl) {
-        // Pick random question on refresh
         const randomIndex = Math.floor(Math.random() * mathQuestions.length);
         const selectedQ = mathQuestions[randomIndex];
 
@@ -115,7 +128,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     feedbackEl.style.color = "var(--wrong)";
                 }
             });
-
             optionsGridEl.appendChild(btn);
         });
     }
