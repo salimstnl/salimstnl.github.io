@@ -59,6 +59,22 @@
         .course-table tr:hover { background: rgba(255,255,255,0.02); }
         .resource-link { color: var(--text-main); text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: color 0.3s; }
         .resource-link:hover { color: var(--accent); }
+
+        /* Search & Filter Bar */
+        .search-input, .tag-select {
+            padding: 0.8rem 1.2rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            border-radius: 8px;
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+        .search-input { width: 100%; max-width: 400px; }
+        .tag-select { width: 100%; max-width: 200px; cursor: pointer; }
+        .search-input:focus, .tag-select:focus { border-color: var(--accent); }
     </style>
 </head>
 <body>
@@ -308,6 +324,27 @@
             if (event.target.classList.contains('modal-overlay')) {
                 closeModal(id);
             }
+        }
+        
+        function filterCourses() {
+            const searchInput = document.getElementById('courseSearch').value.toLowerCase();
+            const tagFilter = document.getElementById('courseTagFilter').value.toLowerCase();
+            const courses = document.querySelectorAll('.course-item');
+
+            courses.forEach(course => {
+                const title = course.querySelector('.course-title').innerText.toLowerCase();
+                const desc = course.querySelector('.course-desc').innerText.toLowerCase();
+                const tags = course.getAttribute('data-tags').toLowerCase();
+
+                const matchesSearch = title.includes(searchInput) || desc.includes(searchInput);
+                const matchesTag = tagFilter === 'all' || tags.includes(tagFilter);
+
+                if (matchesSearch && matchesTag) {
+                    course.style.display = 'flex';
+                } else {
+                    course.style.display = 'none';
+                }
+            });
         }
     </script>
 </body>
