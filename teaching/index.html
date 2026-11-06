@@ -96,42 +96,54 @@
                 <p class="section-subtitle">I teach more than math — bridging academic rigor with intuitive cognitive frameworks.</p>
             </div>
 
-            <div class="visual-grid-3" style="margin-top: 3rem;">
+            <!-- Search & Filter Bar -->
+            <div class="filter-bar" style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <input type="text" id="courseSearch" placeholder="Search courses or topics..." class="search-input" onkeyup="filterCourses()">
+                
+                <select id="courseTagFilter" class="tag-select" onchange="filterCourses()">
+                    <option value="all">All Categories</option>
+                    <option value="youtube">YouTube</option>
+                    <option value="olympiad">Olympiad Training</option>
+                    <option value="online">Online</option>
+                    <option value="offline">Offline</option>
+                    <option value="saas">SaaS</option>
+                </select>
+            </div>
+
+            <div class="visual-grid-3" id="courseGrid" style="margin-top: 3rem;">
                 
                 <!-- Course Card 1 -->
-                <div class="card visual-card hover-scale" style="display: flex; flex-direction: column;">
+                <div class="card visual-card hover-scale course-item" data-tags="youtube online math" style="display: flex; flex-direction: column;">
                     <img src="https://via.placeholder.com/1280x720/1e1e24/C1B1FC?text=High+School+Math" alt="High School Math" class="course-thumbnail">
                     <div class="card-content" style="flex-grow: 1; display: flex; flex-direction: column;">
                         <span class="card-tag">YouTube • Online</span>
-                        <h3 style="margin-bottom: 0.5rem;">High School Mathematics</h3>
-                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Comprehensive secondary mathematics covering differential calculus, vector algebra, and trigonometric identities.</p>
-                        <button class="btn-outline w-100" onclick="openModal('modal-math-hs')">View Full Curriculum</button>
+                        <h3 class="course-title" style="margin-bottom: 0.5rem;">High School Mathematics</h3>
+                        <p class="course-desc" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Comprehensive secondary mathematics covering differential calculus, vector algebra, and trigonometric identities.</p>
+                        <button class="btn-outline w-100" onclick="openModal('modal-math-hs')">View Full Curriculum &rarr;</button>
                     </div>
                 </div>
 
                 <!-- Course Card 2 -->
-                <div class="card visual-card hover-scale" style="display: flex; flex-direction: column;">
+                <div class="card visual-card hover-scale course-item" data-tags="olympiad offline math" style="display: flex; flex-direction: column;">
                     <img src="https://via.placeholder.com/1280x720/1e1e24/C1B1FC?text=OSN+Matematika" alt="OSN Matematika" class="course-thumbnail">
                     <div class="card-content" style="flex-grow: 1; display: flex; flex-direction: column;">
                         <span class="card-tag">Olympiad Training • Offline</span>
-                        <h3 style="margin-bottom: 0.5rem;">OSN Matematika</h3>
-                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Advanced problem-solving strategies for the Indonesian National Science Olympiad in Number Theory and Combinatorics.</p>
-                        <button class="btn-outline w-100" onclick="openModal('modal-osn-math')">View Full Curriculum</button>
+                        <h3 class="course-title" style="margin-bottom: 0.5rem;">OSN Matematika</h3>
+                        <p class="course-desc" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Advanced problem-solving strategies for the Indonesian National Science Olympiad in Number Theory and Combinatorics.</p>
+                        <button class="btn-outline w-100" onclick="openModal('modal-osn-math')">View Full Curriculum &rarr;</button>
                     </div>
                 </div>
 
                 <!-- Course Card 3 -->
-                <div class="card visual-card hover-scale" style="display: flex; flex-direction: column;">
+                <div class="card visual-card hover-scale course-item" data-tags="vitademy saas theory" style="display: flex; flex-direction: column;">
                     <img src="https://via.placeholder.com/1280x720/1e1e24/C1B1FC?text=Cognitive+Dimensions" alt="Cognitive Dimensions" class="course-thumbnail">
                     <div class="card-content" style="flex-grow: 1; display: flex; flex-direction: column;">
                         <span class="card-tag">Vitademy • SaaS</span>
-                        <h3 style="margin-bottom: 0.5rem;">Cognitive Dimensions Theory</h3>
-                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Understanding human information processing to optimize learning habits, memory retention, and mental output.</p>
-                        <button class="btn-outline w-100" onclick="openModal('modal-cognitive')">View Full Curriculum</button>
+                        <h3 class="course-title" style="margin-bottom: 0.5rem;">Cognitive Dimensions Theory</h3>
+                        <p class="course-desc" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Understanding human information processing to optimize learning habits, memory retention, and mental output.</p>
+                        <button class="btn-outline w-100" onclick="openModal('modal-cognitive')">View Full Curriculum &rarr;</button>
                     </div>
                 </div>
-
-                <!-- Add additional courses here following the exact same HTML structure as above -->
 
             </div>
         </div>
