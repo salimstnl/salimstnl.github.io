@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teaching & Curriculum | Stanley Salim</title>
+    <title>Teaching | Stanley Salim</title>
     <meta name="description" content="Explore mathematics, Olympiad coaching, Cambridge science, and cognitive theory courses taught by Stanley Salim.">
     
     <!-- Google Fonts & FontAwesome -->
@@ -108,8 +108,8 @@
     <main class="section" style="padding-top: 130px;">
         <div class="container">
             <div class="center-text">
-                <h1 class="section-title">Teaching & Curriculum</h1>
-                <p class="section-subtitle">I teach more than math — bridging academic rigor with intuitive cognitive frameworks.</p>
+                <h1 class="section-title">Teaching</h1>
+                <p class="section-subtitle">Explore all my courses and lecture materials on math and science.</p>
             </div>
 
             <!-- Search & Filter Bar -->
@@ -118,35 +118,37 @@
                 
                 <select id="courseTagFilter" class="tag-select" onchange="filterCourses()">
                     <option value="all">All Categories</option>
-                    <option value="youtube">YouTube</option>
-                    <option value="olympiad">Olympiad Training</option>
                     <option value="online">Online</option>
                     <option value="offline">Offline</option>
-                    <option value="saas">SaaS</option>
+                    <option value="special">Special</option>
+                    <option value="formal-science">Formal Science</option>
+                    <option value="natural-science">Natural Science</option>
+                    <option value="social-science">Social Science</option>
+                    <option value="art">Art & Language</option>
                 </select>
             </div>
 
             <div class="visual-grid-3" id="courseGrid" style="margin-top: 3rem;">
                 
                 <!-- Course Card 1 -->
-                <div class="card visual-card hover-scale course-item" data-tags="youtube online math" style="display: flex; flex-direction: column;">
-                    <img src="https://via.placeholder.com/1280x720/1e1e24/C1B1FC?text=High+School+Math" alt="High School Math" class="course-thumbnail">
+                <div class="card visual-card hover-scale course-item" data-tags="online formal-science" style="display: flex; flex-direction: column;">
+                    <img src="../images/courses-mtk-sma.png" alt="High School Math" class="course-thumbnail">
                     <div class="card-content" style="flex-grow: 1; display: flex; flex-direction: column;">
-                        <span class="card-tag">YouTube • Online</span>
-                        <h3 class="course-title" style="margin-bottom: 0.5rem;">High School Mathematics</h3>
-                        <p class="course-desc" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Comprehensive secondary mathematics covering differential calculus, vector algebra, and trigonometric identities.</p>
-                        <button class="btn-outline w-100" onclick="openModal('modal-math-hs')">View Full Curriculum &rarr;</button>
+                        <span class="card-tag">Online • Formal Science</span>
+                        <h3 class="course-title" style="margin-bottom: 0.5rem;">Problem Solving Matematika [Edisi SMA]</h3>
+                        <p class="course-desc" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Comprehensive high school mathematics covering year 10-12.</p>
+                        <button class="btn-outline w-100" onclick="openModal('modal-ps-math-sma')">View Course &rarr;</button>
                     </div>
                 </div>
 
                 <!-- Course Card 2 -->
-                <div class="card visual-card hover-scale course-item" data-tags="olympiad offline math" style="display: flex; flex-direction: column;">
-                    <img src="https://via.placeholder.com/1280x720/1e1e24/C1B1FC?text=OSN+Matematika" alt="OSN Matematika" class="course-thumbnail">
+                <div class="card visual-card hover-scale course-item" data-tags="offline formal-science" style="display: flex; flex-direction: column;">
+                    <img src="../images/courses-olympiad-math.png" alt="OSN Matematika" class="course-thumbnail">
                     <div class="card-content" style="flex-grow: 1; display: flex; flex-direction: column;">
-                        <span class="card-tag">Olympiad Training • Offline</span>
-                        <h3 class="course-title" style="margin-bottom: 0.5rem;">OSN Matematika</h3>
-                        <p class="course-desc" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Advanced problem-solving strategies for the Indonesian National Science Olympiad in Number Theory and Combinatorics.</p>
-                        <button class="btn-outline w-100" onclick="openModal('modal-osn-math')">View Full Curriculum &rarr;</button>
+                        <span class="card-tag">Offline • Formal Science</span>
+                        <h3 class="course-title" style="margin-bottom: 0.5rem;">Olimpiade Matematika SMA</h3>
+                        <p class="course-desc" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Advanced training for various high school competitions from OSN to IMO.</p>
+                        <button class="btn-outline w-100" onclick="openModal('modal-olim-math-sma')">View Course &rarr;</button>
                     </div>
                 </div>
 
@@ -157,7 +159,7 @@
                         <span class="card-tag">Vitademy • SaaS</span>
                         <h3 class="course-title" style="margin-bottom: 0.5rem;">Cognitive Dimensions Theory</h3>
                         <p class="course-desc" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Understanding human information processing to optimize learning habits, memory retention, and mental output.</p>
-                        <button class="btn-outline w-100" onclick="openModal('modal-cognitive')">View Full Curriculum &rarr;</button>
+                        <button class="btn-outline w-100" onclick="openModal('modal-cognitive')">View Course &rarr;</button>
                     </div>
                 </div>
 
@@ -170,37 +172,60 @@
          ========================================== -->
 
     <!-- Modal 1: High School Math -->
-    <div id="modal-math-hs" class="modal-overlay" onclick="handleOutsideClick(event, 'modal-math-hs')">
+    <div id="modal-ps-math-sma" class="modal-overlay" onclick="handleOutsideClick(event, 'modal-ps-math-sma')">
         <div class="modal-content">
-            <button class="modal-close" onclick="closeModal('modal-math-hs')"><i class="fas fa-times"></i></button>
-            <span class="card-tag" style="margin-bottom: 1rem; display: inline-block;">YouTube • Online</span>
-            <h2 style="margin-bottom: 1rem;">High School Mathematics</h2>
-            <p style="color: var(--text-muted); line-height: 1.7;">This open-access course bridges the gap between rote memorization and true mathematical intuition. The curriculum is designed to help students visualize differential calculus, manipulate vectors seamlessly, and understand the geometric proofs behind trigonometric identities.</p>
+            <button class="modal-close" onclick="closeModal('modal-ps-math-sma')"><i class="fas fa-times"></i></button>
+            <span class="card-tag" style="margin-bottom: 1rem; display: inline-block;">Online • Formal Science</span>
+            <h2 style="margin-bottom: 1rem;">Problem Solving Matematika [Edisi SMA]</h2>
+            <p style="color: var(--text-muted); line-height: 1.7;">This is an open-access course based on the "Art of Problem Solving" book. The curriculum focuses on basic to advanced techniques used to solve various topics in high school mathematics.</p>
             
-            <h3 style="margin-top: 2rem; margin-bottom: 1rem; color: var(--text-main); font-family: var(--font-sans);">Curriculum & Resources</h3>
+            <h3 style="margin-top: 2rem; margin-bottom: 1rem; color: var(--text-main); font-family: var(--font-sans);">Learning Objectives</h3>
+            <p style="color: var(--text-muted); line-height: 1.7;">You will be able to solve (almost) every high school mathematics problem, equipped with standard olympiad-level techniques, and gain a solid foundation for further STEM studies.</p>
+            
+            <h3 style="margin-top: 2rem; margin-bottom: 1rem; color: var(--text-main); font-family: var(--font-sans);">Course Contents</h3>
             <div class="table-responsive">
                 <table class="course-table">
                     <thead>
                         <tr>
                             <th style="width: 15%;">Module</th>
                             <th style="width: 55%;">Topic & Description</th>
-                            <th style="width: 30%;">Resource Link</th>
+                            <th style="width: 30%;">Resource</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Week 1-2</td>
-                            <td><strong>Differential Calculus</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Limits, derivatives, and real-world optimization problems.</span></td>
+                            <td>Chapter 0</td>
+                            <td><strong>Tips & Tricks</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Foundations on how to learn mathematics effectively.</span></td>
                             <td><a href="#" target="_blank" class="resource-link"><i class="fab fa-youtube" style="color: #ff0000;"></i> Video Lecture</a></td>
                         </tr>
                         <tr>
-                            <td>Week 3-4</td>
-                            <td><strong>Vector Algebra</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Dot products, cross products, and 3D spatial reasoning.</span></td>
-                            <td><a href="#" target="_blank" class="resource-link"><i class="fas fa-file-pdf" style="color: var(--accent);"></i> Download PDF</a></td>
+                            <td>Chapter 1</td>
+                            <td><strong>Exponents & Logarithms</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Indices properties, roots, rationalizing denominators, logarithm.</span></td>
+                            <td><a href="#" target="_blank" class="resource-link"><i class="fab fa-youtube" style="color: #ff0000;"></i> Video Lecture</a></td>
                         </tr>
                         <tr>
-                            <td>Week 5-6</td>
-                            <td><strong>Trigonometric Identities</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Euler's formula connections and geometric proofs.</span></td>
+                            <td>Chapter 2</td>
+                            <td><strong>Complex Numbers</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Real numbers, imaginary numbers, complex numbers.</span></td>
+                            <td><a href="#" target="_blank" class="resource-link"><i class="fab fa-youtube" style="color: #ff0000;"></i> Video Lecture</a></td>
+                        </tr>
+                        <tr>
+                            <td>Chapter 3</td>
+                            <td><strong>Algebra</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Linear equations, ratio, conversion factors, percentage.</span></td>
+                            <td><a href="#" target="_blank" class="resource-link"><i class="fab fa-youtube" style="color: #ff0000;"></i> Video Lecture</a></td>
+                        </tr>
+                        <tr>
+                            <td>Chapter 4</td>
+                            <td><strong>Number Theory</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Number base, modular arithmetics, divisibility, prime factorization.</span></td>
+                            <td><a href="#" target="_blank" class="resource-link"><i class="fab fa-youtube" style="color: #ff0000;"></i> Video Lecture</a></td>
+                        </tr>
+                        <tr>
+                            <td>Chapter 5</td>
+                            <td><strong>Quadratics</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Quadratic equations, quadratic formula, hidden quadratics.</span></td>
+                            <td><a href="#" target="_blank" class="resource-link"><i class="fab fa-youtube" style="color: #ff0000;"></i> Video Lecture</a></td>
+                        </tr>
+                        <tr>
+                            <td>Chapter 6+</td>
+                            <td><strong>Coming soon</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Coming soon.</span></td>
                             <td><a href="#" target="_blank" class="resource-link"><i class="fab fa-youtube" style="color: #ff0000;"></i> Video Lecture</a></td>
                         </tr>
                     </tbody>
@@ -210,33 +235,163 @@
     </div>
 
     <!-- Modal 2: OSN Matematika -->
-    <div id="modal-osn-math" class="modal-overlay" onclick="handleOutsideClick(event, 'modal-osn-math')">
+    <div id="modal-olim-math-sma" class="modal-overlay" onclick="handleOutsideClick(event, 'modal-olim-math-sma')">
         <div class="modal-content">
-            <button class="modal-close" onclick="closeModal('modal-osn-math')"><i class="fas fa-times"></i></button>
-            <span class="card-tag" style="margin-bottom: 1rem; display: inline-block;">Olympiad Training • Offline</span>
-            <h2 style="margin-bottom: 1rem;">OSN Matematika</h2>
+            <button class="modal-close" onclick="closeModal('modal-olim-math-sma')"><i class="fas fa-times"></i></button>
+            <span class="card-tag" style="margin-bottom: 1rem; display: inline-block;">Offline • Formal Science</span>
+            <h2 style="margin-bottom: 1rem;">Olimpiade Matematika SMA</h2>
             <p style="color: var(--text-muted); line-height: 1.7;">A rigorous training camp designed to elevate national competitors. We break down the four pillars of Olympiad mathematics, training the brain to recognize abstract patterns and construct airtight proofs under extreme time constraints.</p>
             
-            <h3 style="margin-top: 2rem; margin-bottom: 1rem; color: var(--text-main); font-family: var(--font-sans);">Curriculum & Resources</h3>
+            <h3 style="margin-top: 2rem; margin-bottom: 1rem; color: var(--text-main); font-family: var(--font-sans);">Learning Objectives</h3>
+            <p style="color: var(--text-muted); line-height: 1.7;">Anda akan bisa berkompetisi di berbagai olimpiade matematika dan mengembangkan pola pikir matematis.</p>
+            
+            <h3 style="margin-top: 2rem; margin-bottom: 1rem; color: var(--text-main); font-family: var(--font-sans);">Course Contents (Term 1)</h3>
+            
             <div class="table-responsive">
                 <table class="course-table">
                     <thead>
                         <tr>
-                            <th style="width: 15%;">Session</th>
+                            <th style="width: 15%;">Module</th>
                             <th style="width: 55%;">Topic & Description</th>
-                            <th style="width: 30%;">Resource Link</th>
+                            <th style="width: 30%;">Resource</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Module A</td>
-                            <td><strong>Number Theory</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Modular arithmetic, Diophantine equations, and prime sieves.</span></td>
-                            <td><a href="#" target="_blank" class="resource-link"><i class="fas fa-file-pdf" style="color: var(--accent);"></i> Problem Set A</a></td>
+                            <td>Week 1</td>
+                            <td><strong>Pengantar Matematika Kompetitif</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Pengenalan program, perbedaan school math vs competitive math, mindset problem-solver, tips & tricks.</span></td>
+                            <td><a href="#" target="_blank" class="resource-link"><i class="fas fa-file-pdf" style="color: var(--accent);"></i> Buku Referensi</a></td>
                         </tr>
                         <tr>
-                            <td>Module B</td>
-                            <td><strong>Combinatorics</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Pigeonhole principle, graph theory basics, and generating functions.</span></td>
-                            <td><a href="#" target="_blank" class="resource-link"><i class="fas fa-file-pdf" style="color: var(--accent);"></i> Problem Set B</a></td>
+                            <td>Week 2</td>
+                            <td><strong>Teori Himpunan & Logika</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Himpunan, logika, notasi, ordered pair, operasi biner.</span></td>
+                            <td><a href="#" target="_blank" class="resource-link"><i class="fas fa-file-pdf" style="color: var(--accent);"></i> Lembar Soal 1</a></td>
+                        </tr>
+                        <tr>
+                            <td>Week 3</td>
+                            <td><strong>Eksponen & Logaritma</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Sifat perpangkatan dan logaritma, bilangan riil.</span></td>
+                            <td><a href="#" target="_blank" class="resource-link"><i class="fas fa-file-pdf" style="color: var(--accent);"></i> Lembar Soal 2</a></td>
+                        </tr>
+                        <tr>
+                            <td>Week 4</td>
+                            <td><strong>Persamaan Linear</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Persamaan linear, sistem persamaan linear, soal cerita, perbandingan.</span></td>
+                            <td><a href="#" target="_blank" class="resource-link"><i class="fas fa-file-pdf" style="color: var(--accent);"></i> Lembar Soal 3</a></td>
+                        </tr>
+                        <tr>
+                            <td>Week 5</td>
+                            <td><strong>Persamaan Kuadrat</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Persamaan kuadrat, kuadrat tersembunyi, trik faktorisasi, teorema Vieta.</span></td>
+                            <td><a href="#" target="_blank" class="resource-link"><i class="fas fa-file-pdf" style="color: var(--accent);"></i> Lembar Soal 4</a></td>
+                        </tr>
+                        <tr>
+                            <td>Week 6</td>
+                            <td><strong>Teori Bilangan</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Keterbagian, basis bilangan, aritmetika modular dasar.</span></td>
+                            <td><a href="#" target="_blank" class="resource-link"><i class="fas fa-file-pdf" style="color: var(--accent);"></i> Lembar Soal 5</a></td>
+                        </tr>
+                        <tr>
+                            <td>Week 7</td>
+                            <td><strong>Aritmetika Modular</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Fungsi number theoretic, Teorema Fermat Kecil, Teorema Euler, Teorema Sisa Tiongkok.</span></td>
+                            <td><a href="#" target="_blank" class="resource-link"><i class="fas fa-file-pdf" style="color: var(--accent);"></i> Lembar Soal 6</a></td>
+                        </tr>
+                        <tr>
+                            <td>Week 8</td>
+                            <td><strong>Geometri Segitiga</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Sifat segitiga, garis-garis pada segitiga, Aturan Sinus & Cosinus, Teorema segitiga</span></td>
+                            <td><a href="#" target="_blank" class="resource-link"><i class="fas fa-file-pdf" style="color: var(--accent);"></i> Lembar Soal 7</a></td>
+                        </tr>
+                        <tr>
+                            <td>Week 9</td>
+                            <td><strong>Geometri Segibanyak</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Sifat segiempat, segibanyak beraturan, angle chasing, luas bangun datar.</span></td>
+                            <td><a href="#" target="_blank" class="resource-link"><i class="fas fa-file-pdf" style="color: var(--accent);"></i> Lembar Soal 8</a></td>
+                        </tr>
+                        <tr>
+                            <td>Week 10</td>
+                            <td><strong>Geometri Lingkaran</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Sifat lingkaran, power of a point, cyclic quadrilateral, Teorema Thales, Ptolomeus, Ceva.</span></td>
+                            <td><a href="#" target="_blank" class="resource-link"><i class="fas fa-file-pdf" style="color: var(--accent);"></i> Lembar Soal 9</a></td>
+                        </tr>
+                        <tr>
+                            <td>Week 11</td>
+                            <td><strong>Geometri Analitik</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Diagram Kartesian, persamaan garis, persamaan lingkaran, tangent & secant line.</span></td>
+                            <td><a href="#" target="_blank" class="resource-link"><i class="fas fa-file-pdf" style="color: var(--accent);"></i> Lembar Soal 10</a></td>
+                        </tr>
+                        <tr>
+                            <td>Week 12</td>
+                            <td><strong>Fungsi</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Fungsi, invers, komposisi, modulus, pertidaksamaan</span></td>
+                            <td><a href="#" target="_blank" class="resource-link"><i class="fas fa-file-pdf" style="color: var(--accent);"></i> Lembar Soal 11</a></td>
+                        </tr>
+                        <tr>
+                            <td>Week 13</td>
+                            <td><strong>Baris & Deret</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Baris & deret aritmetika & geometri, sistem rekursi, bilangan Fibonacci & Lucas</span></td>
+                            <td><a href="#" target="_blank" class="resource-link"><i class="fas fa-file-pdf" style="color: var(--accent);"></i> Lembar Soal 12</a></td>
+                        </tr>
+                        <tr>
+                            <td>Week 14</td>
+                            <td><strong>Kombinatorika & Peluang</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Kombinasi, permutasi, variasi, peluang, peluang bersyarat, </span></td>
+                            <td><a href="#" target="_blank" class="resource-link"><i class="fas fa-file-pdf" style="color: var(--accent);"></i> Lembar Soal 13</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 style="margin-top: 2rem; margin-bottom: 1rem; color: var(--text-main); font-family: var(--font-sans);">Course Contents (Term 2)</h3>
+            
+            <div class="table-responsive">
+                <table class="course-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 15%;">Module</th>
+                            <th style="width: 55%;">Topic & Description</th>
+                            <th style="width: 30%;">Resource</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Week 15</td>
+                            <td><strong>Soft Skill dalam Matematika</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Tingkat kesulitan soal & Elo rating, nilai dalam matematika, strategi, karier</span></td>
+                            <td><a href="#" target="_blank" class="resource-link"><i class="fas fa-file-pdf" style="color: var(--accent);"></i> Buku Referensi</a></td>
+                        </tr>
+                        <tr>
+                            <td>Week 16</td>
+                            <td><strong>Bilangan Kompleks</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Bilangan imajiner, diagram Argand, teorema De Moivre, teorema fundamental aljabar.</span></td>
+                            <td><a href="#" target="_blank" class="resource-link"><i class="fas fa-file-pdf" style="color: var(--accent);"></i> Lembar Soal 14</a></td>
+                        </tr>
+                        <tr>
+                            <td>Week 17</td>
+                            <td><strong>Trigonometri</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Fungsi sinus, cosinus, tangent, cotangent, secant, cosecant, sifat-sifat trigonometri.</span></td>
+                            <td><a href="#" target="_blank" class="resource-link"><i class="fas fa-file-pdf" style="color: var(--accent);"></i> Lembar Soal 15</a></td>
+                        </tr>
+                        <tr>
+                            <td>Week 18</td>
+                            <td><strong>Aljabar Linear</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Vektor, matriks, dot product & cross product, transformasi geometri, eigenvector.</span></td>
+                            <td><a href="#" target="_blank" class="resource-link"><i class="fas fa-file-pdf" style="color: var(--accent);"></i> Lembar Soal 16</a></td>
+                        </tr>
+                        <tr>
+                            <td>Week 19</td>
+                            <td><strong>Kalkulus Differensial</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Limit, sifat turunan, aturan L'hopital, polinomial Taylor.</span></td>
+                            <td><a href="#" target="_blank" class="resource-link"><i class="fas fa-file-pdf" style="color: var(--accent);"></i> Lembar Soal 17</a></td>
+                        </tr>
+                        <tr>
+                            <td>Week 20</td>
+                            <td><strong>Kalkulus Integral</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Naikan, teknik substitusi, integral parsial, luas, volume, arclength.</span></td>
+                            <td><a href="#" target="_blank" class="resource-link"><i class="fas fa-file-pdf" style="color: var(--accent);"></i> Lembar Soal 18</a></td>
+                        </tr>
+                        <tr>
+                            <td>Week 21</td>
+                            <td><strong>Teori Graf</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Graf, pohon, pewarnaan graf, teorema Euler & Hamilton</span></td>
+                            <td><a href="#" target="_blank" class="resource-link"><i class="fas fa-file-pdf" style="color: var(--accent);"></i> Lembar Soal 19</a></td>
+                        </tr>
+                        <tr>
+                            <td>Week 22</td>
+                            <td><strong>Mathematical Modelling</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Soal optimisasi, sistem persamaan, aproksimasi, interpolasi, statistika dasar</span></td>
+                            <td><a href="#" target="_blank" class="resource-link"><i class="fas fa-file-pdf" style="color: var(--accent);"></i> Lembar Soal 20</a></td>
+                        </tr>
+                        <tr>
+                            <td>Week 23</td>
+                            <td><strong>Simulasi 1</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Simulasi kompetisi matematika: ketepatan & kecepatan.</span></td>
+                            <td><a href="#" target="_blank" class="resource-link"><i class="fas fa-file-pdf" style="color: var(--accent);"></i> Past papers</a></td>
+                        </tr>
+                        <tr>
+                            <td>Week 24</td>
+                            <td><strong>Simulasi 2</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">.</span>Simulasi kompetisi matematika: kerja sama & strategi</td>
+                            <td><a href="#" target="_blank" class="resource-link"><i class="fas fa-file-pdf" style="color: var(--accent);"></i> Past papers</a></td>
                         </tr>
                     </tbody>
                 </table>
