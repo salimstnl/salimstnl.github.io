@@ -121,9 +121,9 @@
                     <option value="online">Online</option>
                     <option value="offline">Offline</option>
                     <option value="special">Special</option>
-                    <option value="formal-science">Formal Science</option>
-                    <option value="natural-science">Natural Science</option>
-                    <option value="social-science">Social Science</option>
+                    <option value="formal">Formal Science</option>
+                    <option value="natural">Natural Science</option>
+                    <option value="social">Social Science</option>
                     <option value="art">Art & Language</option>
                 </select>
             </div>
@@ -131,8 +131,8 @@
             <div class="visual-grid-3" id="courseGrid" style="margin-top: 3rem;">
                 
                 <!-- Course Card 1 -->
-                <div class="card visual-card hover-scale course-item" data-tags="online formal-science" style="display: flex; flex-direction: column;">
-                    <img src="../images/courses-mtk-sma.png" alt="High School Math" class="course-thumbnail">
+                <div class="card visual-card hover-scale course-item" data-tags="online formal" style="display: flex; flex-direction: column;">
+                    <img src="../images/courses-mtk-sma.png" alt="Matematika SMA" class="course-thumbnail">
                     <div class="card-content" style="flex-grow: 1; display: flex; flex-direction: column;">
                         <span class="card-tag">Online • Formal Science</span>
                         <h3 class="course-title" style="margin-bottom: 0.5rem;">Math Problem Solving [SMA]</h3>
@@ -142,8 +142,8 @@
                 </div>
 
                 <!-- Course Card 2 -->
-                <div class="card visual-card hover-scale course-item" data-tags="offline formal-science" style="display: flex; flex-direction: column;">
-                    <img src="../images/courses-olympiad-math.png" alt="OSN Matematika" class="course-thumbnail">
+                <div class="card visual-card hover-scale course-item" data-tags="offline formal" style="display: flex; flex-direction: column;">
+                    <img src="../images/courses-olympiad-math.png" alt="Olimpiade Matematika" class="course-thumbnail">
                     <div class="card-content" style="flex-grow: 1; display: flex; flex-direction: column;">
                         <span class="card-tag">Offline • Formal Science</span>
                         <h3 class="course-title" style="margin-bottom: 0.5rem;">Olimpiade Matematika SMA</h3>
@@ -153,8 +153,8 @@
                 </div>
 
                 <!-- Course Card 3 -->
-                <div class="card visual-card hover-scale course-item" data-tags="offline natural-science" style="display: flex; flex-direction: column;">
-                    <img src="../images/courses-olympiad-astro.png" alt="Cognitive Dimensions" class="course-thumbnail">
+                <div class="card visual-card hover-scale course-item" data-tags="offline natural" style="display: flex; flex-direction: column;">
+                    <img src="../images/courses-olympiad-astro.png" alt="Olimpiade Astronomi" class="course-thumbnail">
                     <div class="card-content" style="flex-grow: 1; display: flex; flex-direction: column;">
                         <span class="card-tag">Offline • Natural Science</span>
                         <h3 class="course-title" style="margin-bottom: 0.5rem;">Olimpiade Astronomi SMA</h3>
@@ -164,8 +164,8 @@
                 </div>
                 
                 <!-- Course Card 4 -->
-                <div class="card visual-card hover-scale course-item" data-tags="offline formal-science" style="display: flex; flex-direction: column;">
-                    <img src="../images/courses-cambridge-math.png" alt="Cognitive Dimensions" class="course-thumbnail">
+                <div class="card visual-card hover-scale course-item" data-tags="offline formal" style="display: flex; flex-direction: column;">
+                    <img src="../images/courses-cambridge-math.png" alt="Cambridge Mathematics" class="course-thumbnail">
                     <div class="card-content" style="flex-grow: 1; display: flex; flex-direction: column;">
                         <span class="card-tag">Offline • Formal Science</span>
                         <h3 class="course-title" style="margin-bottom: 0.5rem;">AS & A Level Mathematics</h3>
@@ -176,12 +176,78 @@
 
                 <!-- Course Card 5 -->
                 <div class="card visual-card hover-scale course-item" data-tags="offline formal" style="display: flex; flex-direction: column;">
-                    <img src="../images/courses-cambridge-cs.png" alt="Cognitive Dimensions" class="course-thumbnail">
+                    <img src="../images/courses-cambridge-cs.png" alt="Cambridge Computer Science" class="course-thumbnail">
                     <div class="card-content" style="flex-grow: 1; display: flex; flex-direction: column;">
                         <span class="card-tag">Offline • Formal Science</span>
                         <h3 class="course-title" style="margin-bottom: 0.5rem;">AS & A Level Computer Science</h3>
                         <p class="course-desc" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Features theoretical concepts and practical programming skills.</p>
                         <button class="btn-outline w-100" onclick="openModal('modal-alevel-cs')">View Course &rarr;</button>
+                    </div>
+                </div>
+
+                <!-- Course Card 6 -->
+                <div class="card visual-card hover-scale course-item" data-tags="offline natural" style="display: flex; flex-direction: column;">
+                    <img src="../images/courses-cambridge-phys.png" alt="Cambridge Physics" class="course-thumbnail">
+                    <div class="card-content" style="flex-grow: 1; display: flex; flex-direction: column;">
+                        <span class="card-tag">Offline • Natural Science</span>
+                        <h3 class="course-title" style="margin-bottom: 0.5rem;">AS & A Level Physics</h3>
+                        <p class="course-desc" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Features theoretical concepts and practical programming skills.</p>
+                        <button class="btn-outline w-100" onclick="openModal('modal-alevel-phys')">View Course &rarr;</button>
+                    </div>
+                </div>
+
+                <!-- Course Card 7 -->
+                <div class="card visual-card hover-scale course-item" data-tags="offline natural" style="display: flex; flex-direction: column;">
+                    <img src="../images/courses-cambridge-chem.png" alt="Cambridge Chemistry" class="course-thumbnail">
+                    <div class="card-content" style="flex-grow: 1; display: flex; flex-direction: column;">
+                        <span class="card-tag">Offline • Natural Science</span>
+                        <h3 class="course-title" style="margin-bottom: 0.5rem;">AS & A Level Chemistry</h3>
+                        <p class="course-desc" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Features theoretical concepts and practical programming skills.</p>
+                        <button class="btn-outline w-100" onclick="openModal('modal-alevel-chem')">View Course &rarr;</button>
+                    </div>
+                </div>
+
+                <!-- Course Card 8 -->
+                <div class="card visual-card hover-scale course-item" data-tags="offline social" style="display: flex; flex-direction: column;">
+                    <img src="../images/courses-5cd.png" alt="Cognitive Dimensions" class="course-thumbnail">
+                    <div class="card-content" style="flex-grow: 1; display: flex; flex-direction: column;">
+                        <span class="card-tag">Offline • Social Science</span>
+                        <h3 class="course-title" style="margin-bottom: 0.5rem;">Cognitive Dimensions Theory</h3>
+                        <p class="course-desc" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Features theoretical concepts and practical programming skills.</p>
+                        <button class="btn-outline w-100" onclick="openModal('modal-5cd')">View Course &rarr;</button>
+                    </div>
+                </div>
+
+                <!-- Course Card 9 -->
+                <div class="card visual-card hover-scale course-item" data-tags="offline art" style="display: flex; flex-direction: column;">
+                    <img src="../images/courses-ielts.png" alt="IELTS" class="course-thumbnail">
+                    <div class="card-content" style="flex-grow: 1; display: flex; flex-direction: column;">
+                        <span class="card-tag">Offline • Art & Language</span>
+                        <h3 class="course-title" style="margin-bottom: 0.5rem;">IELTS Preparation</h3>
+                        <p class="course-desc" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Features theoretical concepts and practical programming skills.</p>
+                        <button class="btn-outline w-100" onclick="openModal('modal-ielts')">View Course &rarr;</button>
+                    </div>
+                </div>
+
+                <!-- Course Card 10 -->
+                <div class="card visual-card hover-scale course-item" data-tags="offline formal" style="display: flex; flex-direction: column;">
+                    <img src="../images/courses-introalg.png" alt="Introductory Algebra" class="course-thumbnail">
+                    <div class="card-content" style="flex-grow: 1; display: flex; flex-direction: column;">
+                        <span class="card-tag">Offline • Formal Science</span>
+                        <h3 class="course-title" style="margin-bottom: 0.5rem;">Introductory Algebra</h3>
+                        <p class="course-desc" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Features theoretical concepts and practical programming skills.</p>
+                        <button class="btn-outline w-100" onclick="openModal('modal-introalg')">View Course &rarr;</button>
+                    </div>
+                </div>
+
+                <!-- Course Card 11 -->
+                <div class="card visual-card hover-scale course-item" data-tags="offline formal" style="display: flex; flex-direction: column;">
+                    <img src="../images/courses-python.png" alt="Python" class="course-thumbnail">
+                    <div class="card-content" style="flex-grow: 1; display: flex; flex-direction: column;">
+                        <span class="card-tag">Offline • Formal Science</span>
+                        <h3 class="course-title" style="margin-bottom: 0.5rem;">Python</h3>
+                        <p class="course-desc" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Features theoretical concepts and practical programming skills.</p>
+                        <button class="btn-outline w-100" onclick="openModal('modal-python')">View Course &rarr;</button>
                     </div>
                 </div>
 
