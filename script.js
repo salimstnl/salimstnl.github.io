@@ -1,6 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
-    /* 1. Typewriter Title Animation */
+    
+    /* ----------------------------------------------------------------------
+       1. Typewriter Title Animation
+       ---------------------------------------------------------------------- */
     const typeWriterEl = document.getElementById('typewriter');
+    
     if (typeWriterEl) {
         const text = "The most powerful art is that of learning.";
         let isDeleting = false;
@@ -13,10 +17,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (!isDeleting && charIndex < text.length) {
                 charIndex++;
-                typingSpeed = 60; // Slightly faster typing speed
+                typingSpeed = 60; // Typing speed
             } else if (isDeleting && charIndex > 0) {
                 charIndex--;
-                typingSpeed = 30; // Erase faster
+                typingSpeed = 30; // Erase speed
             } else if (!isDeleting && charIndex === text.length) {
                 isDeleting = true;
                 typingSpeed = 3000; // Pause at end before erasing
@@ -24,8 +28,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 isDeleting = false;
                 typingSpeed = 500; // Pause before typing again
             }
+            
             setTimeout(type, typingSpeed);
         }
+        
         setTimeout(type, 800);
     }
 
@@ -33,11 +39,11 @@ document.addEventListener("DOMContentLoaded", () => {
        2. Glowing Timeline Scroll Effect
        ---------------------------------------------------------------------- */
     const timeline = document.getElementById('timeline');
+    
     if (timeline) {
         window.addEventListener('scroll', () => {
             const rect = timeline.getBoundingClientRect();
-            // Calculate how far we've scrolled past the top of the timeline
-            // Trigger earlier so the line moves down as the user scrolls
+            // Calculate scroll progress relative to the viewport
             const scrollPercentage = Math.max(0, Math.min(100, ((window.innerHeight * 0.7 - rect.top) / rect.height) * 100));
             timeline.style.setProperty('--scroll-glow', `${scrollPercentage}%`);
         });
@@ -51,8 +57,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const navLinks = document.getElementById("navLinks");
     const navOverlay = document.getElementById("navOverlay");
 
-    function openMenu() { navLinks.classList.add("active"); navOverlay.classList.add("active"); document.body.style.overflow = "hidden"; }
-    function closeMenu() { navLinks.classList.remove("active"); navOverlay.classList.remove("active"); document.body.style.overflow = "auto"; }
+    function openMenu() { 
+        navLinks.classList.add("active"); 
+        navOverlay.classList.add("active"); 
+        document.body.style.overflow = "hidden"; 
+    }
+    
+    function closeMenu() { 
+        navLinks.classList.remove("active"); 
+        navOverlay.classList.remove("active"); 
+        document.body.style.overflow = "auto"; 
+    }
 
     if (hamburgerBtn) hamburgerBtn.addEventListener("click", openMenu);
     if (navCloseBtn) navCloseBtn.addEventListener("click", closeMenu);
@@ -69,9 +84,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function showSlide(index) {
         if (slides.length === 0) return;
-        if (index >= slides.length) currentSlide = 0;
-        else if (index < 0) currentSlide = slides.length - 1;
-        else currentSlide = index;
+        
+        if (index >= slides.length) {
+            currentSlide = 0;
+        } else if (index < 0) {
+            currentSlide = slides.length - 1;
+        } else {
+            currentSlide = index;
+        }
 
         slides.forEach((slide, i) => slide.classList.toggle("active", i === currentSlide));
         dots.forEach((dot, i) => dot.classList.toggle("active", i === currentSlide));
@@ -82,12 +102,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     dots.forEach(dot => {
         dot.addEventListener("click", (e) => {
-            showSlide(parseInt(e.target.getAttribute("data-slide")));
+            showSlide(parseInt(e.target.getAttribute("data-slide"), 10));
         });
     });
 
     /* ----------------------------------------------------------------------
-       5. "Math of the Day" Generator (Using KaTeX for beautiful rendering)
+       5. "Math of the Day" Generator (KaTeX Rendering)
        ---------------------------------------------------------------------- */
     const mathQuestions = [
         { 
@@ -118,7 +138,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Helper to render math strings with KaTeX
     function renderMath(text) {
-        // If the text contains \( ... \), we render it via KaTeX
         if (typeof katex !== 'undefined' && text.includes("\\(")) {
             return text.replace(/\\\((.*?)\\\)/g, (match, p1) => {
                 return katex.renderToString(p1, { throwOnError: false });
@@ -153,7 +172,59 @@ document.addEventListener("DOMContentLoaded", () => {
                     feedbackEl.style.color = "var(--wrong)";
                 }
             });
+            
             optionsGridEl.appendChild(btn);
         });
     }
+
+    /* ----------------------------------------------------------------------
+       6. Automatic Course Sync (Fetches latest 6 courses for Homepage)
+       ---------------------------------------------------------------------- */
+    async function loadLatestCoursesToHome() {
+        const homeGrid = document.getElementById('home-course-grid');
+        
+        // Execute only if the grid exists on the current page
+        if (!homeGrid) return;
+
+        try {
+            // Fetch the HTML content of the teaching page
+            const response = await fetch('/teaching/index.html');
+            const htmlText = await response.text();
+            
+            // Parse the fetched text into a readable HTML DOM
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(htmlText, 'text/html');
+            
+            // Find all course cards and extract the first 6
+            const allCourses = doc.querySelectorAll('.course-item');
+            const latestCourses = Array.from(allCourses).slice(0, 6);
+            
+            // Clear loading text
+            homeGrid.innerHTML = '';
+            
+            // Inject each course into the homepage
+            latestCourses.forEach(course => {
+                const btn = course.querySelector('button');
+                
+                if (btn) {
+                    const linkObj = document.createElement('a');
+                    linkObj.className = btn.className; // Maintain button styling
+                    linkObj.href = '/teaching/';
+                    linkObj.innerHTML = 'View Full Curriculum &rarr;';
+                    linkObj.style.textDecoration = 'none';
+                    linkObj.style.display = 'inline-block';
+                    btn.replaceWith(linkObj);
+                }
+                
+                homeGrid.appendChild(course);
+            });
+            
+        } catch (error) {
+            console.error('Failed to sync courses from teaching page:', error);
+            homeGrid.innerHTML = '<p style="text-align: center; color: var(--wrong); grid-column: 1 / -1;">Failed to load courses. Please visit the Teaching page.</p>';
+        }
+    }
+
+    // Execute the fetch function
+    loadLatestCoursesToHome();
 });
