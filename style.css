@@ -153,3 +153,19 @@ footer { background-color: var(--bg-darker); border-top: 1px solid var(--border)
     .nav-links.active { right: 0; }
     .nav-close-btn { display: block; position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none; color: var(--text-main); font-size: 1.5rem; cursor: pointer;}
 }
+
+/* Search & Filter Bar */
+        .search-input, .tag-select {
+            padding: 0.8rem 1.2rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            border-radius: 8px;
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+        .search-input { width: 100%; max-width: 400px; }
+        .tag-select { width: 100%; max-width: 200px; cursor: pointer; }
+        .search-input:focus, .tag-select:focus { border-color: var(--accent); }
