@@ -14,13 +14,59 @@
     
     <link rel="stylesheet" href="../style.css">
     <link rel="icon" type="image/png" href="../images/logo.png">
+
+    <style>
+        /* Course Grid Specifics */
+        .course-thumbnail {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            border-bottom: 1px solid var(--border);
+        }
+        .w-100 { width: 100%; text-align: center; margin-top: auto; }
+        
+        /* Modal System for Course Details */
+        .modal-overlay {
+            display: none; 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(10, 10, 10, 0.85); backdrop-filter: blur(8px);
+            z-index: 2000; align-items: center; justify-content: center;
+            padding: 1.5rem; opacity: 0; transition: opacity 0.3s ease;
+        }
+        .modal-overlay.active { opacity: 1; }
+        .modal-content {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 12px; width: 100%; max-width: 900px;
+            max-height: 85vh; overflow-y: auto; padding: 2.5rem;
+            position: relative; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.6);
+        }
+        .modal-close {
+            position: absolute; top: 1.5rem; right: 1.5rem;
+            background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+            border-radius: 50%; color: var(--text-muted); width: 36px; height: 36px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; cursor: pointer; transition: all 0.3s;
+        }
+        .modal-close:hover { background: var(--wrong); color: #fff; border-color: var(--wrong); transform: rotate(90deg); }
+        
+        /* Course Detail Tables */
+        .course-detail-img { width: 100%; height: 250px; object-fit: cover; border-radius: 8px; margin-bottom: 1.5rem; }
+        .table-responsive { overflow-x: auto; margin-top: 1.5rem; border: 1px solid var(--border); border-radius: 8px; }
+        .course-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.95rem; }
+        .course-table th, .course-table td { padding: 1rem 1.2rem; border-bottom: 1px solid var(--border); }
+        .course-table th { color: var(--accent); font-weight: 600; background: rgba(0,0,0,0.2); }
+        .course-table tr:last-child td { border-bottom: none; }
+        .course-table tr:hover { background: rgba(255,255,255,0.02); }
+        .resource-link { color: var(--text-main); text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: color 0.3s; }
+        .resource-link:hover { color: var(--accent); }
+    </style>
 </head>
 <body>
 
     <!-- Mobile Navigation Drawer Overlay -->
     <div class="nav-overlay" id="navOverlay"></div>
 
-    <!-- Navigation Bar -->
+    <!-- Navigation Bar (Matches Homepage) -->
     <nav>
         <div class="nav-content">
             <a href="/" class="logo">
@@ -34,7 +80,6 @@
                 <a href="/blog/">Blog</a>
                 <a href="/publication/">Publication</a>
                 <a href="/about/">About</a>
-                <a href="../docs/cv.pdf" target="_blank" class="btn-outline">View CV</a>
             </div>
 
             <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
@@ -51,121 +96,161 @@
                 <p class="section-subtitle">I teach more than math — bridging academic rigor with intuitive cognitive frameworks.</p>
             </div>
 
-            <div class="courses-grid" style="margin-top: 3rem;">
+            <div class="visual-grid-3" style="margin-top: 3rem;">
                 
-                <!-- Course 1 -->
-                <div class="card course-card">
-                    <div class="card-tag">YouTube • Open Access</div>
-                    <h3>High School Mathematics</h3>
-                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 0.5rem;">Comprehensive secondary mathematics covering differential calculus, vector algebra, trigonometric identities, and polynomial functions.</p>
-                    <div style="margin-top: 1.5rem; border-top: 1px solid var(--border); padding-top: 1rem;">
-                        <span style="font-size: 0.85rem; color: var(--accent); font-weight: 600;"><i class="fab fa-youtube"></i> Full Video Series</span>
+                <!-- Course Card 1 -->
+                <div class="card visual-card hover-scale" style="display: flex; flex-direction: column;">
+                    <img src="https://via.placeholder.com/1280x720/1e1e24/C1B1FC?text=High+School+Math" alt="High School Math" class="course-thumbnail">
+                    <div class="card-content" style="flex-grow: 1; display: flex; flex-direction: column;">
+                        <span class="card-tag">YouTube • Online</span>
+                        <h3 style="margin-bottom: 0.5rem;">High School Mathematics</h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Comprehensive secondary mathematics covering differential calculus, vector algebra, and trigonometric identities.</p>
+                        <button class="btn-outline w-100" onclick="openModal('modal-math-hs')">View Full Curriculum</button>
                     </div>
                 </div>
 
-                <!-- Course 2 -->
-                <div class="card course-card">
-                    <div class="card-tag">Olympiad Training</div>
-                    <h3>OSN Matematika</h3>
-                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 0.5rem;">Advanced problem-solving strategies for the Indonesian National Science Olympiad in Number Theory, Combinatorics, Geometry, and Algebra.</p>
-                    <div style="margin-top: 1.5rem; border-top: 1px solid var(--border); padding-top: 1rem;">
-                        <span style="font-size: 0.85rem; color: var(--accent); font-weight: 600;"><i class="fas fa-file-pdf"></i> Problem Sets & Notes</span>
+                <!-- Course Card 2 -->
+                <div class="card visual-card hover-scale" style="display: flex; flex-direction: column;">
+                    <img src="https://via.placeholder.com/1280x720/1e1e24/C1B1FC?text=OSN+Matematika" alt="OSN Matematika" class="course-thumbnail">
+                    <div class="card-content" style="flex-grow: 1; display: flex; flex-direction: column;">
+                        <span class="card-tag">Olympiad Training • Offline</span>
+                        <h3 style="margin-bottom: 0.5rem;">OSN Matematika</h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Advanced problem-solving strategies for the Indonesian National Science Olympiad in Number Theory and Combinatorics.</p>
+                        <button class="btn-outline w-100" onclick="openModal('modal-osn-math')">View Full Curriculum</button>
                     </div>
                 </div>
 
-                <!-- Course 3 -->
-                <div class="card course-card">
-                    <div class="card-tag">Olympiad Training</div>
-                    <h3>OSN Astronomi</h3>
-                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 0.5rem;">Astrophysical mechanics, celestial coordinates, orbital dynamics, and spherical trigonometry designed for high school competition candidates.</p>
-                    <div style="margin-top: 1.5rem; border-top: 1px solid var(--border); padding-top: 1rem;">
-                        <span style="font-size: 0.85rem; color: var(--accent); font-weight: 600;"><i class="fas fa-file-pdf"></i> Lecture Slides & Exercises</span>
+                <!-- Course Card 3 -->
+                <div class="card visual-card hover-scale" style="display: flex; flex-direction: column;">
+                    <img src="https://via.placeholder.com/1280x720/1e1e24/C1B1FC?text=Cognitive+Dimensions" alt="Cognitive Dimensions" class="course-thumbnail">
+                    <div class="card-content" style="flex-grow: 1; display: flex; flex-direction: column;">
+                        <span class="card-tag">Vitademy • SaaS</span>
+                        <h3 style="margin-bottom: 0.5rem;">Cognitive Dimensions Theory</h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Understanding human information processing to optimize learning habits, memory retention, and mental output.</p>
+                        <button class="btn-outline w-100" onclick="openModal('modal-cognitive')">View Full Curriculum</button>
                     </div>
                 </div>
 
-                <!-- Course 4 -->
-                <div class="card course-card">
-                    <div class="card-tag">Language & Strategy</div>
-                    <h3>IELTS Preparation</h3>
-                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 0.5rem;">Quantitative strategy for academic writing tasks, high-speed reading comprehension, and structured argument formulation for international study.</p>
-                    <div style="margin-top: 1.5rem; border-top: 1px solid var(--border); padding-top: 1rem;">
-                        <span style="font-size: 0.85rem; color: var(--accent); font-weight: 600;"><i class="fas fa-chalkboard-teacher"></i> Masterclass Curriculum</span>
-                    </div>
-                </div>
-
-                <!-- Course 5 -->
-                <div class="card course-card">
-                    <div class="card-tag">Vitademy • YouTube</div>
-                    <h3>Cognitive Dimensions Theory</h3>
-                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 0.5rem;">Understanding human information processing across 5 cognitive dimensions to optimize learning habits, memory retention, and mental output.</p>
-                    <div style="margin-top: 1.5rem; border-top: 1px solid var(--border); padding-top: 1rem;">
-                        <span style="font-size: 0.85rem; color: var(--accent); font-weight: 600;"><i class="fas fa-brain"></i> Video & White Paper</span>
-                    </div>
-                </div>
-
-                <!-- Course 6 -->
-                <div class="card course-card">
-                    <div class="card-tag">Cambridge International</div>
-                    <h3>Cambridge Mathematics</h3>
-                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 0.5rem;">IGCSE (0580) and A-Level (9709) Pure Mathematics, Mechanics, and Probability & Statistics complete exam preparation.</p>
-                    <div style="margin-top: 1.5rem; border-top: 1px solid var(--border); padding-top: 1rem;">
-                        <span style="font-size: 0.85rem; color: var(--accent); font-weight: 600;"><i class="fas fa-book-open"></i> Syllabus & Past Papers</span>
-                    </div>
-                </div>
-
-                <!-- Course 7 -->
-                <div class="card course-card">
-                    <div class="card-tag">Cambridge International</div>
-                    <h3>Cambridge Physics</h3>
-                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 0.5rem;">Classical mechanics, electromagnetism, thermodynamics, and quantum phenomena for IGCSE and A-Level Physics students.</p>
-                    <div style="margin-top: 1.5rem; border-top: 1px solid var(--border); padding-top: 1rem;">
-                        <span style="font-size: 0.85rem; color: var(--accent); font-weight: 600;"><i class="fas fa-atom"></i> Lecture Modules</span>
-                    </div>
-                </div>
-
-                <!-- Course 8 -->
-                <div class="card course-card">
-                    <div class="card-tag">Cambridge International</div>
-                    <h3>Cambridge Chemistry</h3>
-                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 0.5rem;">Stoichiometry, chemical energetics, equilibrium, kinetics, and organic synthesis mechanisms for secondary international curricula.</p>
-                    <div style="margin-top: 1.5rem; border-top: 1px solid var(--border); padding-top: 1rem;">
-                        <span style="font-size: 0.85rem; color: var(--accent); font-weight: 600;"><i class="fas fa-vial"></i> Topic Handouts</span>
-                    </div>
-                </div>
-
-                <!-- Course 9 -->
-                <div class="card course-card">
-                    <div class="card-tag">Cambridge International</div>
-                    <h3>Cambridge Computer Science</h3>
-                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 0.5rem;">Algorithmic thinking, data structures, pseudocode, computer architecture, and logic gates for IGCSE and A-Level Computer Science.</p>
-                    <div style="margin-top: 1.5rem; border-top: 1px solid var(--border); padding-top: 1rem;">
-                        <span style="font-size: 0.85rem; color: var(--accent); font-weight: 600;"><i class="fas fa-code"></i> Code Examples & Notes</span>
-                    </div>
-                </div>
-
-                <!-- Course 10 -->
-                <div class="card course-card">
-                    <div class="card-tag">Higher Education</div>
-                    <h3>Introductory Algebra</h3>
-                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 0.5rem;">University-level abstract algebra covering group theory, ring theory, modular arithmetic, and rigorous proof construction taught at BME.</p>
-                    <div style="margin-top: 1.5rem; border-top: 1px solid var(--border); padding-top: 1rem;">
-                        <span style="font-size: 0.85rem; color: var(--accent); font-weight: 600;"><i class="fas fa-university"></i> University Tutorials</span>
-                    </div>
-                </div>
-
-                <!-- Course 11 -->
-                <div class="card course-card">
-                    <div class="card-tag">Computational Math</div>
-                    <h3>Python for Mathematics</h3>
-                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 0.5rem;">Programming numerical algorithms, array manipulations with NumPy, symbolic calculus with SymPy, and recursive fractal generation.</p>
-                    <div style="margin-top: 1.5rem; border-top: 1px solid var(--border); padding-top: 1rem;">
-                        <span style="font-size: 0.85rem; color: var(--accent); font-weight: 600;"><i class="fab fa-python"></i> Jupyter Notebooks</span>
-                    </div>
-                </div>
+                <!-- Add additional courses here following the exact same HTML structure as above -->
 
             </div>
         </div>
     </main>
+
+    <!-- ==========================================
+         MODALS (Course Details & Tables)
+         ========================================== -->
+
+    <!-- Modal 1: High School Math -->
+    <div id="modal-math-hs" class="modal-overlay" onclick="handleOutsideClick(event, 'modal-math-hs')">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('modal-math-hs')"><i class="fas fa-times"></i></button>
+            <span class="card-tag" style="margin-bottom: 1rem; display: inline-block;">YouTube • Online</span>
+            <h2 style="margin-bottom: 1rem;">High School Mathematics</h2>
+            <p style="color: var(--text-muted); line-height: 1.7;">This open-access course bridges the gap between rote memorization and true mathematical intuition. The curriculum is designed to help students visualize differential calculus, manipulate vectors seamlessly, and understand the geometric proofs behind trigonometric identities.</p>
+            
+            <h3 style="margin-top: 2rem; margin-bottom: 1rem; color: var(--text-main); font-family: var(--font-sans);">Curriculum & Resources</h3>
+            <div class="table-responsive">
+                <table class="course-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 15%;">Module</th>
+                            <th style="width: 55%;">Topic & Description</th>
+                            <th style="width: 30%;">Resource Link</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Week 1-2</td>
+                            <td><strong>Differential Calculus</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Limits, derivatives, and real-world optimization problems.</span></td>
+                            <td><a href="#" target="_blank" class="resource-link"><i class="fab fa-youtube" style="color: #ff0000;"></i> Video Lecture</a></td>
+                        </tr>
+                        <tr>
+                            <td>Week 3-4</td>
+                            <td><strong>Vector Algebra</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Dot products, cross products, and 3D spatial reasoning.</span></td>
+                            <td><a href="#" target="_blank" class="resource-link"><i class="fas fa-file-pdf" style="color: var(--accent);"></i> Download PDF</a></td>
+                        </tr>
+                        <tr>
+                            <td>Week 5-6</td>
+                            <td><strong>Trigonometric Identities</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Euler's formula connections and geometric proofs.</span></td>
+                            <td><a href="#" target="_blank" class="resource-link"><i class="fab fa-youtube" style="color: #ff0000;"></i> Video Lecture</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 2: OSN Matematika -->
+    <div id="modal-osn-math" class="modal-overlay" onclick="handleOutsideClick(event, 'modal-osn-math')">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('modal-osn-math')"><i class="fas fa-times"></i></button>
+            <span class="card-tag" style="margin-bottom: 1rem; display: inline-block;">Olympiad Training • Offline</span>
+            <h2 style="margin-bottom: 1rem;">OSN Matematika</h2>
+            <p style="color: var(--text-muted); line-height: 1.7;">A rigorous training camp designed to elevate national competitors. We break down the four pillars of Olympiad mathematics, training the brain to recognize abstract patterns and construct airtight proofs under extreme time constraints.</p>
+            
+            <h3 style="margin-top: 2rem; margin-bottom: 1rem; color: var(--text-main); font-family: var(--font-sans);">Curriculum & Resources</h3>
+            <div class="table-responsive">
+                <table class="course-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 15%;">Session</th>
+                            <th style="width: 55%;">Topic & Description</th>
+                            <th style="width: 30%;">Resource Link</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Module A</td>
+                            <td><strong>Number Theory</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Modular arithmetic, Diophantine equations, and prime sieves.</span></td>
+                            <td><a href="#" target="_blank" class="resource-link"><i class="fas fa-file-pdf" style="color: var(--accent);"></i> Problem Set A</a></td>
+                        </tr>
+                        <tr>
+                            <td>Module B</td>
+                            <td><strong>Combinatorics</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Pigeonhole principle, graph theory basics, and generating functions.</span></td>
+                            <td><a href="#" target="_blank" class="resource-link"><i class="fas fa-file-pdf" style="color: var(--accent);"></i> Problem Set B</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 3: Cognitive Dimensions Theory -->
+    <div id="modal-cognitive" class="modal-overlay" onclick="handleOutsideClick(event, 'modal-cognitive')">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('modal-cognitive')"><i class="fas fa-times"></i></button>
+            <span class="card-tag" style="margin-bottom: 1rem; display: inline-block;">Vitademy • SaaS</span>
+            <h2 style="margin-bottom: 1rem;">Cognitive Dimensions Theory</h2>
+            <p style="color: var(--text-muted); line-height: 1.7;">The foundational framework powering the Vitademy platform. This curriculum breaks down the 5 cognitive dimensions of human learning, equipping students and professionals with the tools to map their own analytical bottlenecks and optimize their memory retention curves.</p>
+            
+            <h3 style="margin-top: 2rem; margin-bottom: 1rem; color: var(--text-main); font-family: var(--font-sans);">Curriculum & Resources</h3>
+            <div class="table-responsive">
+                <table class="course-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 15%;">Phase</th>
+                            <th style="width: 55%;">Topic & Description</th>
+                            <th style="width: 30%;">Resource Link</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Phase 1</td>
+                            <td><strong>The 5 Dimensions Framework</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Defining the axes of cognitive information processing.</span></td>
+                            <td><a href="#" target="_blank" class="resource-link"><i class="fas fa-file-alt" style="color: var(--accent);"></i> White Paper</a></td>
+                        </tr>
+                        <tr>
+                            <td>Phase 2</td>
+                            <td><strong>Algorithmic Assessment</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">How the VitaTest maps thinking species (e.g. Emerald, Sapphire).</span></td>
+                            <td><a href="#" target="_blank" class="resource-link"><i class="fas fa-laptop-code" style="color: var(--accent);"></i> Try VitaTest</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Footer -->
     <footer>
@@ -185,5 +270,33 @@
     </footer>
 
     <script src="../script.js"></script>
+    
+    <!-- Modal Control Script -->
+    <script>
+        function openModal(id) {
+            const modal = document.getElementById(id);
+            if (!modal) return;
+            modal.style.display = 'flex';
+            // Slight delay forces browser reflow so CSS transition works
+            setTimeout(() => { modal.classList.add('active'); }, 10);
+            document.body.style.overflow = 'hidden'; // Prevents scrolling behind modal
+        }
+
+        function closeModal(id) {
+            const modal = document.getElementById(id);
+            if (!modal) return;
+            modal.classList.remove('active');
+            // Wait for transition to finish before hiding element
+            setTimeout(() => { modal.style.display = 'none'; }, 300);
+            document.body.style.overflow = ''; 
+        }
+
+        function handleOutsideClick(event, id) {
+            // Close the modal if the user clicks on the dark overlay background
+            if (event.target.classList.contains('modal-overlay')) {
+                closeModal(id);
+            }
+        }
+    </script>
 </body>
 </html>
