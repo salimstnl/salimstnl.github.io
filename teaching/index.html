@@ -60,8 +60,8 @@
         .resource-link { color: var(--text-main); text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: color 0.3s; }
         .resource-link:hover { color: var(--accent); }
 
-        /* Search & Filter Bar */
-        .search-input, .tag-select {
+        /* Search Bar */
+        .search-input {
             padding: 0.8rem 1.2rem;
             background: var(--surface);
             border: 1px solid var(--border);
@@ -71,10 +71,65 @@
             font-size: 0.9rem;
             outline: none;
             transition: border-color 0.3s ease;
+            width: 100%;
+            max-width: 500px;
         }
-        .search-input { width: 100%; max-width: 400px; }
-        .tag-select { width: 100%; max-width: 200px; cursor: pointer; }
-        .search-input:focus, .tag-select:focus { border-color: var(--accent); }
+        .search-input:focus { border-color: var(--accent); }
+
+        /* Multi-Select Filter Tags */
+        .filter-tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            justify-content: center;
+            align-items: center;
+            margin-top: 1rem;
+        }
+        .filter-tag {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.85rem;
+            font-family: var(--font-sans);
+            user-select: none;
+        }
+        .filter-tag:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-main);
+        }
+        .filter-tag.active {
+            background: var(--accent);
+            color: var(--bg-darker);
+            border-color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Beautiful Colored Course Tags */
+        .card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 0.8rem;
+        }
+        .course-tag {
+            padding: 0.25rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .tag-online { background: rgba(16, 185, 129, 0.15); color: #10b981; } /* Emerald */
+        .tag-offline { background: rgba(239, 68, 68, 0.15); color: #ef4444; } /* Red */
+        .tag-formal { background: rgba(193, 177, 252, 0.15); color: var(--accent); } /* Purple */
+        .tag-natural { background: rgba(56, 189, 248, 0.15); color: #38bdf8; } /* Light Blue */
+        .tag-social { background: rgba(250, 204, 21, 0.15); color: #facc15; } /* Yellow */
+        .tag-art { background: rgba(244, 114, 182, 0.15); color: #f472b6; } /* Pink */
     </style>
 </head>
 <body>
@@ -112,20 +167,18 @@
                 <p class="section-subtitle">Explore all my courses and lecture materials on math and science.</p>
             </div>
 
-            <!-- Search & Filter Bar -->
-            <div class="filter-bar" style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+            <!-- Search & Interactive Filter Bar -->
+            <div class="filter-bar" style="margin-top: 2rem; display: flex; flex-direction: column; align-items: center;">
                 <input type="text" id="courseSearch" placeholder="Search courses or topics..." class="search-input" onkeyup="filterCourses()">
                 
-                <select id="courseTagFilter" class="tag-select" onchange="filterCourses()">
-                    <option value="all">All Categories</option>
-                    <option value="online">Online</option>
-                    <option value="offline">Offline</option>
-                    <option value="special">Special</option>
-                    <option value="formal">Formal Science</option>
-                    <option value="natural">Natural Science</option>
-                    <option value="social">Social Science</option>
-                    <option value="art">Art & Language</option>
-                </select>
+                <div id="tagFilters" class="filter-tags-container">
+                    <button class="filter-tag" data-value="online" onclick="toggleTag(this)">Online</button>
+                    <button class="filter-tag" data-value="offline" onclick="toggleTag(this)">Offline</button>
+                    <button class="filter-tag" data-value="formal" onclick="toggleTag(this)">Formal Science</button>
+                    <button class="filter-tag" data-value="natural" onclick="toggleTag(this)">Natural Science</button>
+                    <button class="filter-tag" data-value="social" onclick="toggleTag(this)">Social Science</button>
+                    <button class="filter-tag" data-value="art" onclick="toggleTag(this)">Art & Language</button>
+                </div>
             </div>
 
             <div class="visual-grid-3" id="courseGrid" style="margin-top: 3rem;">
@@ -134,10 +187,13 @@
                 <div class="card visual-card hover-scale course-item" data-tags="online formal" style="display: flex; flex-direction: column;">
                     <img src="../images/courses-mtk-sma.png" alt="Matematika SMA" class="course-thumbnail">
                     <div class="card-content" style="flex-grow: 1; display: flex; flex-direction: column;">
-                        <span class="card-tag">Online • Formal Science</span>
+                        <div class="card-tags">
+                            <span class="course-tag tag-online">Online</span>
+                            <span class="course-tag tag-formal">Formal Science</span>
+                        </div>
                         <h3 class="course-title" style="margin-bottom: 0.5rem;">Math Problem Solving [SMA]</h3>
                         <p class="course-desc" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Comprehensive high school mathematics covering year 10-12.</p>
-                        <button class="btn-outline w-100" onclick="openModal('modal-ps-math-sma')">View Course &rarr;</button>
+                        <button class="btn-primary w-100" onclick="openModal('modal-ps-math-sma')">View Course &rarr;</button>
                     </div>
                 </div>
 
@@ -145,10 +201,13 @@
                 <div class="card visual-card hover-scale course-item" data-tags="offline formal" style="display: flex; flex-direction: column;">
                     <img src="../images/courses-olympiad-math.png" alt="Olimpiade Matematika" class="course-thumbnail">
                     <div class="card-content" style="flex-grow: 1; display: flex; flex-direction: column;">
-                        <span class="card-tag">Offline • Formal Science</span>
+                        <div class="card-tags">
+                            <span class="course-tag tag-offline">Offline</span>
+                            <span class="course-tag tag-formal">Formal Science</span>
+                        </div>
                         <h3 class="course-title" style="margin-bottom: 0.5rem;">Olimpiade Matematika SMA</h3>
                         <p class="course-desc" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Advanced training for various high school competitions from OSN to IMO.</p>
-                        <button class="btn-outline w-100" onclick="openModal('modal-olim-math-sma')">View Course &rarr;</button>
+                        <button class="btn-primary w-100" onclick="openModal('modal-olim-math-sma')">View Course &rarr;</button>
                     </div>
                 </div>
 
@@ -156,10 +215,13 @@
                 <div class="card visual-card hover-scale course-item" data-tags="offline natural" style="display: flex; flex-direction: column;">
                     <img src="../images/courses-olympiad-astro.png" alt="Olimpiade Astronomi" class="course-thumbnail">
                     <div class="card-content" style="flex-grow: 1; display: flex; flex-direction: column;">
-                        <span class="card-tag">Offline • Natural Science</span>
+                        <div class="card-tags">
+                            <span class="course-tag tag-offline">Offline</span>
+                            <span class="course-tag tag-natural">Natural Science</span>
+                        </div>
                         <h3 class="course-title" style="margin-bottom: 0.5rem;">Olimpiade Astronomi SMA</h3>
                         <p class="course-desc" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Advanced training for various high school competitions from OSN to IMO.</p>
-                        <button class="btn-outline w-100" onclick="openModal('modal-olim-astro-sma')">View Course &rarr;</button>
+                        <button class="btn-primary w-100" onclick="openModal('modal-olim-astro-sma')">View Course &rarr;</button>
                     </div>
                 </div>
                 
@@ -167,10 +229,13 @@
                 <div class="card visual-card hover-scale course-item" data-tags="offline formal" style="display: flex; flex-direction: column;">
                     <img src="../images/courses-cambridge-math.png" alt="Cambridge Mathematics" class="course-thumbnail">
                     <div class="card-content" style="flex-grow: 1; display: flex; flex-direction: column;">
-                        <span class="card-tag">Offline • Formal Science</span>
+                        <div class="card-tags">
+                            <span class="course-tag tag-offline">Offline</span>
+                            <span class="course-tag tag-formal">Formal Science</span>
+                        </div>
                         <h3 class="course-title" style="margin-bottom: 0.5rem;">AS & A Level Mathematics</h3>
                         <p class="course-desc" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Features Pure Mathematics, Mechanics, and Probability & Statistics.</p>
-                        <button class="btn-outline w-100" onclick="openModal('modal-alevel-math')">View Course &rarr;</button>
+                        <button class="btn-primary w-100" onclick="openModal('modal-alevel-math')">View Course &rarr;</button>
                     </div>
                 </div>
 
@@ -178,10 +243,13 @@
                 <div class="card visual-card hover-scale course-item" data-tags="offline formal" style="display: flex; flex-direction: column;">
                     <img src="../images/courses-cambridge-cs.png" alt="Cambridge Computer Science" class="course-thumbnail">
                     <div class="card-content" style="flex-grow: 1; display: flex; flex-direction: column;">
-                        <span class="card-tag">Offline • Formal Science</span>
+                        <div class="card-tags">
+                            <span class="course-tag tag-offline">Offline</span>
+                            <span class="course-tag tag-formal">Formal Science</span>
+                        </div>
                         <h3 class="course-title" style="margin-bottom: 0.5rem;">AS & A Level Computer Science</h3>
                         <p class="course-desc" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Features theoretical concepts and practical programming skills.</p>
-                        <button class="btn-outline w-100" onclick="openModal('modal-alevel-cs')">View Course &rarr;</button>
+                        <button class="btn-primary w-100" onclick="openModal('modal-alevel-cs')">View Course &rarr;</button>
                     </div>
                 </div>
 
@@ -189,10 +257,13 @@
                 <div class="card visual-card hover-scale course-item" data-tags="offline natural" style="display: flex; flex-direction: column;">
                     <img src="../images/courses-cambridge-phys.png" alt="Cambridge Physics" class="course-thumbnail">
                     <div class="card-content" style="flex-grow: 1; display: flex; flex-direction: column;">
-                        <span class="card-tag">Offline • Natural Science</span>
+                        <div class="card-tags">
+                            <span class="course-tag tag-offline">Offline</span>
+                            <span class="course-tag tag-natural">Natural Science</span>
+                        </div>
                         <h3 class="course-title" style="margin-bottom: 0.5rem;">AS & A Level Physics</h3>
                         <p class="course-desc" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Features theoretical concepts and practical programming skills.</p>
-                        <button class="btn-outline w-100" onclick="openModal('modal-alevel-phys')">View Course &rarr;</button>
+                        <button class="btn-primary w-100" onclick="openModal('modal-alevel-phys')">View Course &rarr;</button>
                     </div>
                 </div>
 
@@ -200,10 +271,13 @@
                 <div class="card visual-card hover-scale course-item" data-tags="offline natural" style="display: flex; flex-direction: column;">
                     <img src="../images/courses-cambridge-chem.png" alt="Cambridge Chemistry" class="course-thumbnail">
                     <div class="card-content" style="flex-grow: 1; display: flex; flex-direction: column;">
-                        <span class="card-tag">Offline • Natural Science</span>
+                        <div class="card-tags">
+                            <span class="course-tag tag-offline">Offline</span>
+                            <span class="course-tag tag-natural">Natural Science</span>
+                        </div>
                         <h3 class="course-title" style="margin-bottom: 0.5rem;">AS & A Level Chemistry</h3>
                         <p class="course-desc" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Features theoretical concepts and practical programming skills.</p>
-                        <button class="btn-outline w-100" onclick="openModal('modal-alevel-chem')">View Course &rarr;</button>
+                        <button class="btn-primary w-100" onclick="openModal('modal-alevel-chem')">View Course &rarr;</button>
                     </div>
                 </div>
 
@@ -211,10 +285,13 @@
                 <div class="card visual-card hover-scale course-item" data-tags="offline social" style="display: flex; flex-direction: column;">
                     <img src="../images/courses-5cd.png" alt="Cognitive Dimensions" class="course-thumbnail">
                     <div class="card-content" style="flex-grow: 1; display: flex; flex-direction: column;">
-                        <span class="card-tag">Offline • Social Science</span>
+                        <div class="card-tags">
+                            <span class="course-tag tag-offline">Offline</span>
+                            <span class="course-tag tag-social">Social Science</span>
+                        </div>
                         <h3 class="course-title" style="margin-bottom: 0.5rem;">Cognitive Dimensions Theory</h3>
                         <p class="course-desc" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Features theoretical concepts and practical programming skills.</p>
-                        <button class="btn-outline w-100" onclick="openModal('modal-5cd')">View Course &rarr;</button>
+                        <button class="btn-primary w-100" onclick="openModal('modal-5cd')">View Course &rarr;</button>
                     </div>
                 </div>
 
@@ -222,10 +299,13 @@
                 <div class="card visual-card hover-scale course-item" data-tags="offline art" style="display: flex; flex-direction: column;">
                     <img src="../images/courses-ielts.png" alt="IELTS" class="course-thumbnail">
                     <div class="card-content" style="flex-grow: 1; display: flex; flex-direction: column;">
-                        <span class="card-tag">Offline • Art & Language</span>
+                        <div class="card-tags">
+                            <span class="course-tag tag-offline">Offline</span>
+                            <span class="course-tag tag-art">Art & Language</span>
+                        </div>
                         <h3 class="course-title" style="margin-bottom: 0.5rem;">IELTS Preparation</h3>
                         <p class="course-desc" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Features theoretical concepts and practical programming skills.</p>
-                        <button class="btn-outline w-100" onclick="openModal('modal-ielts')">View Course &rarr;</button>
+                        <button class="btn-primary w-100" onclick="openModal('modal-ielts')">View Course &rarr;</button>
                     </div>
                 </div>
 
@@ -233,10 +313,13 @@
                 <div class="card visual-card hover-scale course-item" data-tags="offline formal" style="display: flex; flex-direction: column;">
                     <img src="../images/courses-introalg.png" alt="Introductory Algebra" class="course-thumbnail">
                     <div class="card-content" style="flex-grow: 1; display: flex; flex-direction: column;">
-                        <span class="card-tag">Offline • Formal Science</span>
+                        <div class="card-tags">
+                            <span class="course-tag tag-offline">Offline</span>
+                            <span class="course-tag tag-formal">Formal Science</span>
+                        </div>
                         <h3 class="course-title" style="margin-bottom: 0.5rem;">Introductory Algebra</h3>
                         <p class="course-desc" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Features theoretical concepts and practical programming skills.</p>
-                        <button class="btn-outline w-100" onclick="openModal('modal-introalg')">View Course &rarr;</button>
+                        <button class="btn-primary w-100" onclick="openModal('modal-introalg')">View Course &rarr;</button>
                     </div>
                 </div>
 
@@ -244,10 +327,13 @@
                 <div class="card visual-card hover-scale course-item" data-tags="offline formal" style="display: flex; flex-direction: column;">
                     <img src="../images/courses-python.png" alt="Python" class="course-thumbnail">
                     <div class="card-content" style="flex-grow: 1; display: flex; flex-direction: column;">
-                        <span class="card-tag">Offline • Formal Science</span>
+                        <div class="card-tags">
+                            <span class="course-tag tag-offline">Offline</span>
+                            <span class="course-tag tag-formal">Formal Science</span>
+                        </div>
                         <h3 class="course-title" style="margin-bottom: 0.5rem;">Python</h3>
                         <p class="course-desc" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Features theoretical concepts and practical programming skills.</p>
-                        <button class="btn-outline w-100" onclick="openModal('modal-python')">View Course &rarr;</button>
+                        <button class="btn-primary w-100" onclick="openModal('modal-python')">View Course &rarr;</button>
                     </div>
                 </div>
 
@@ -263,7 +349,10 @@
     <div id="modal-ps-math-sma" class="modal-overlay" onclick="handleOutsideClick(event, 'modal-ps-math-sma')">
         <div class="modal-content">
             <button class="modal-close" onclick="closeModal('modal-ps-math-sma')"><i class="fas fa-times"></i></button>
-            <span class="card-tag" style="margin-bottom: 1rem; display: inline-block;">Online • Formal Science</span>
+            <div class="card-tags" style="margin-bottom: 1rem;">
+                <span class="course-tag tag-online">Online</span>
+                <span class="course-tag tag-formal">Formal Science</span>
+            </div>
             <h2 style="margin-bottom: 1rem;">Math Problem Solving [SMA]</h2>
             <p style="color: var(--text-muted); line-height: 1.7;">This is an open-access course based on the "Art of Problem Solving" book. The curriculum focuses on basic to advanced techniques used to solve various topics in high school mathematics.</p>
             
@@ -326,7 +415,10 @@
     <div id="modal-olim-math-sma" class="modal-overlay" onclick="handleOutsideClick(event, 'modal-olim-math-sma')">
         <div class="modal-content">
             <button class="modal-close" onclick="closeModal('modal-olim-math-sma')"><i class="fas fa-times"></i></button>
-            <span class="card-tag" style="margin-bottom: 1rem; display: inline-block;">Offline • Formal Science</span>
+            <div class="card-tags" style="margin-bottom: 1rem;">
+                <span class="course-tag tag-offline">Offline</span>
+                <span class="course-tag tag-formal">Formal Science</span>
+            </div>
             <h2 style="margin-bottom: 1rem;">Olimpiade Matematika SMA</h2>
             <p style="color: var(--text-muted); line-height: 1.7;">A rigorous training camp designed to elevate national competitors. We break down the four pillars of Olympiad mathematics, training the brain to recognize abstract patterns and construct airtight proofs under extreme time constraints.</p>
             
@@ -478,7 +570,7 @@
                         </tr>
                         <tr>
                             <td>Week 24</td>
-                            <td><strong>Simulasi 2</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">.</span>Simulasi kompetisi matematika: kerja sama & strategi</td>
+                            <td><strong>Simulasi 2</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Simulasi kompetisi matematika: kerja sama & strategi.</span></td>
                             <td><a href="#" target="_blank" class="resource-link"><i class="fas fa-file-pdf" style="color: var(--accent);"></i> Past papers</a></td>
                         </tr>
                     </tbody>
@@ -487,16 +579,19 @@
         </div>
     </div>
 
-    <!-- Modal 3: Cognitive Dimensions Theory -->
+    <!-- Modal 3: Olimpiade Astronomi -->
     <div id="modal-olim-astro-sma" class="modal-overlay" onclick="handleOutsideClick(event, 'modal-olim-astro-sma')">
         <div class="modal-content">
             <button class="modal-close" onclick="closeModal('modal-olim-astro-sma')"><i class="fas fa-times"></i></button>
-            <span class="card-tag" style="margin-bottom: 1rem; display: inline-block;">Offline • Natural Science</span>
+            <div class="card-tags" style="margin-bottom: 1rem;">
+                <span class="course-tag tag-offline">Offline</span>
+                <span class="course-tag tag-natural">Natural Science</span>
+            </div>
             <h2 style="margin-bottom: 1rem;">Olimpiade Astronomi SMA</h2>
-            <p style="color: var(--text-muted); line-height: 1.7;">The foundational framework powering the Vitademy platform. This curriculum breaks down the 5 cognitive dimensions of human learning, equipping students and professionals with the tools to map their own analytical bottlenecks and optimize their memory retention curves.</p>
+            <p style="color: var(--text-muted); line-height: 1.7;">Advanced astrophysical mechanics, celestial coordinates, orbital dynamics, and spherical trigonometry designed for high school competition candidates.</p>
             
             <h3 style="margin-top: 2rem; margin-bottom: 1rem; color: var(--text-main); font-family: var(--font-sans);">Learning Objectives</h3>
-            <p style="color: var(--text-muted); line-height: 1.7;">Anda akan bisa berkompetisi di berbagai olimpiade matematika dan mengembangkan pola pikir matematis.</p>
+            <p style="color: var(--text-muted); line-height: 1.7;">Anda akan bisa berkompetisi di berbagai olimpiade astronomi dan mengembangkan pola pikir ilmiah dan fisika astrofisika.</p>
             
             <h3 style="margin-top: 2rem; margin-bottom: 1rem; color: var(--text-main); font-family: var(--font-sans);">Course Contents</h3>
             
@@ -512,73 +607,13 @@
                     <tbody>
                         <tr>
                             <td>Week 1</td>
-                            <td><strong>Pengantar Matematika Kompetitif</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Pengenalan program, perbedaan school math vs competitive math, mindset problem-solver, tips & tricks.</span></td>
+                            <td><strong>Pengantar Astronomi</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Pengenalan program, tata surya, hukum dasar fisika.</span></td>
                             <td><a href="#" target="_blank" class="resource-link"><i class="fas fa-file-pdf" style="color: var(--accent);"></i> Buku Referensi</a></td>
                         </tr>
                         <tr>
                             <td>Week 2</td>
-                            <td><strong>Teori Himpunan & Logika</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Himpunan, logika, notasi, ordered pair, operasi biner.</span></td>
+                            <td><strong>Mekanika Benda Langit</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Hukum gravitasi Newton, Hukum Kepler, lintasan orbit.</span></td>
                             <td><a href="#" target="_blank" class="resource-link"><i class="fas fa-file-pdf" style="color: var(--accent);"></i> Lembar Soal 1</a></td>
-                        </tr>
-                        <tr>
-                            <td>Week 3</td>
-                            <td><strong>Eksponen & Logaritma</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Sifat perpangkatan dan logaritma, bilangan riil.</span></td>
-                            <td><a href="#" target="_blank" class="resource-link"><i class="fas fa-file-pdf" style="color: var(--accent);"></i> Lembar Soal 2</a></td>
-                        </tr>
-                        <tr>
-                            <td>Week 4</td>
-                            <td><strong>Persamaan Linear</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Persamaan linear, sistem persamaan linear, soal cerita, perbandingan.</span></td>
-                            <td><a href="#" target="_blank" class="resource-link"><i class="fas fa-file-pdf" style="color: var(--accent);"></i> Lembar Soal 3</a></td>
-                        </tr>
-                        <tr>
-                            <td>Week 5</td>
-                            <td><strong>Persamaan Kuadrat</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Persamaan kuadrat, kuadrat tersembunyi, trik faktorisasi, teorema Vieta.</span></td>
-                            <td><a href="#" target="_blank" class="resource-link"><i class="fas fa-file-pdf" style="color: var(--accent);"></i> Lembar Soal 4</a></td>
-                        </tr>
-                        <tr>
-                            <td>Week 6</td>
-                            <td><strong>Teori Bilangan</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Keterbagian, basis bilangan, aritmetika modular dasar.</span></td>
-                            <td><a href="#" target="_blank" class="resource-link"><i class="fas fa-file-pdf" style="color: var(--accent);"></i> Lembar Soal 5</a></td>
-                        </tr>
-                        <tr>
-                            <td>Week 7</td>
-                            <td><strong>Aritmetika Modular</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Fungsi number theoretic, Teorema Fermat Kecil, Teorema Euler, Teorema Sisa Tiongkok.</span></td>
-                            <td><a href="#" target="_blank" class="resource-link"><i class="fas fa-file-pdf" style="color: var(--accent);"></i> Lembar Soal 6</a></td>
-                        </tr>
-                        <tr>
-                            <td>Week 8</td>
-                            <td><strong>Geometri Segitiga</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Sifat segitiga, garis-garis pada segitiga, Aturan Sinus & Cosinus, Teorema segitiga</span></td>
-                            <td><a href="#" target="_blank" class="resource-link"><i class="fas fa-file-pdf" style="color: var(--accent);"></i> Lembar Soal 7</a></td>
-                        </tr>
-                        <tr>
-                            <td>Week 9</td>
-                            <td><strong>Geometri Segibanyak</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Sifat segiempat, segibanyak beraturan, angle chasing, luas bangun datar.</span></td>
-                            <td><a href="#" target="_blank" class="resource-link"><i class="fas fa-file-pdf" style="color: var(--accent);"></i> Lembar Soal 8</a></td>
-                        </tr>
-                        <tr>
-                            <td>Week 10</td>
-                            <td><strong>Geometri Lingkaran</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Sifat lingkaran, power of a point, cyclic quadrilateral, Teorema Thales, Ptolomeus, Ceva.</span></td>
-                            <td><a href="#" target="_blank" class="resource-link"><i class="fas fa-file-pdf" style="color: var(--accent);"></i> Lembar Soal 9</a></td>
-                        </tr>
-                        <tr>
-                            <td>Week 11</td>
-                            <td><strong>Geometri Analitik</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Diagram Kartesian, persamaan garis, persamaan lingkaran, tangent & secant line.</span></td>
-                            <td><a href="#" target="_blank" class="resource-link"><i class="fas fa-file-pdf" style="color: var(--accent);"></i> Lembar Soal 10</a></td>
-                        </tr>
-                        <tr>
-                            <td>Week 12</td>
-                            <td><strong>Fungsi</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Fungsi, invers, komposisi, modulus, pertidaksamaan</span></td>
-                            <td><a href="#" target="_blank" class="resource-link"><i class="fas fa-file-pdf" style="color: var(--accent);"></i> Lembar Soal 11</a></td>
-                        </tr>
-                        <tr>
-                            <td>Week 13</td>
-                            <td><strong>Baris & Deret</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Baris & deret aritmetika & geometri, sistem rekursi, bilangan Fibonacci & Lucas</span></td>
-                            <td><a href="#" target="_blank" class="resource-link"><i class="fas fa-file-pdf" style="color: var(--accent);"></i> Lembar Soal 12</a></td>
-                        </tr>
-                        <tr>
-                            <td>Week 14</td>
-                            <td><strong>Kombinatorika & Peluang</strong><br><span style="color: var(--text-muted); font-size: 0.85rem;">Kombinasi, permutasi, variasi, peluang, peluang bersyarat, </span></td>
-                            <td><a href="#" target="_blank" class="resource-link"><i class="fas fa-file-pdf" style="color: var(--accent);"></i> Lembar Soal 13</a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -606,36 +641,38 @@
 
     <script src="../script.js"></script>
     
-    <!-- Modal Control Script -->
+    <!-- Modal & Filter Control Script -->
     <script>
         function openModal(id) {
             const modal = document.getElementById(id);
             if (!modal) return;
             modal.style.display = 'flex';
-            // Slight delay forces browser reflow so CSS transition works
             setTimeout(() => { modal.classList.add('active'); }, 10);
-            document.body.style.overflow = 'hidden'; // Prevents scrolling behind modal
+            document.body.style.overflow = 'hidden'; 
         }
 
         function closeModal(id) {
             const modal = document.getElementById(id);
             if (!modal) return;
             modal.classList.remove('active');
-            // Wait for transition to finish before hiding element
             setTimeout(() => { modal.style.display = 'none'; }, 300);
             document.body.style.overflow = ''; 
         }
 
         function handleOutsideClick(event, id) {
-            // Close the modal if the user clicks on the dark overlay background
             if (event.target.classList.contains('modal-overlay')) {
                 closeModal(id);
             }
         }
         
+        function toggleTag(btn) {
+            btn.classList.toggle('active');
+            filterCourses();
+        }
+
         function filterCourses() {
             const searchInput = document.getElementById('courseSearch').value.toLowerCase();
-            const tagFilter = document.getElementById('courseTagFilter').value.toLowerCase();
+            const activeTags = Array.from(document.querySelectorAll('.filter-tag.active')).map(t => t.dataset.value.toLowerCase());
             const courses = document.querySelectorAll('.course-item');
 
             courses.forEach(course => {
@@ -644,7 +681,9 @@
                 const tags = course.getAttribute('data-tags').toLowerCase();
 
                 const matchesSearch = title.includes(searchInput) || desc.includes(searchInput);
-                const matchesTag = tagFilter === 'all' || tags.includes(tagFilter);
+                
+                // Course must contain EVERY selected tag to be visible (AND logic for multi-filtering)
+                const matchesTag = activeTags.length === 0 || activeTags.every(tag => tags.includes(tag));
 
                 if (matchesSearch && matchesTag) {
                     course.style.display = 'flex';
