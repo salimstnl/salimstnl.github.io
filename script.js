@@ -210,9 +210,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     const linkObj = document.createElement('a');
                     linkObj.className = btn.className; // Maintain button styling
                     linkObj.href = '/teaching/';
-                    linkObj.innerHTML = 'View Full Curriculum &rarr;';
+                    linkObj.innerHTML = 'View All Courses &rarr;';
                     linkObj.style.textDecoration = 'none';
                     linkObj.style.display = 'inline-block';
+                    linkObj.style.textAlign = 'center';
                     btn.replaceWith(linkObj);
                 }
                 
