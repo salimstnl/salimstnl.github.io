@@ -129,6 +129,36 @@ document.addEventListener("DOMContentLoaded", () => {
             q: "Evaluate the integral \\( \\int_0^1 3x^2 \\,dx \\)",
             options: ["1", "3", "\\( \\frac{1}{3} \\)", "0"],
             answer: 0
+        },
+        { 
+            q: "What is the value of \\( \\log_2(32) \\)?", 
+            options: ["4", "5", "6", "8"], 
+            answer: 1 
+        },
+        { 
+            q: "What is the exact value of \\( \\sin(30^\\circ) \\)?", 
+            options: ["\\( \\frac{1}{2} \\)", "\\( \\frac{\\sqrt{2}}{2} \\)", "\\( \\frac{\\sqrt{3}}{2} \\)", "1"], 
+            answer: 0 
+        },
+        { 
+            q: "How many different ways can you arrange the letters in the word 'MATH'?", 
+            options: ["12", "16", "24", "256"], 
+            answer: 2 
+        },
+        {
+            q: "What is the area of a circle with a diameter of 10?",
+            options: ["\\( 10\\pi \\)", "\\( 20\\pi \\)", "\\( 25\\pi \\)", "\\( 100\\pi \\)"],
+            answer: 2
+        },
+        {
+            q: "Simplify the expression \\( \\frac{x^5 \\cdot x^3}{x^2} \\).",
+            options: ["\\( x^6 \\)", "\\( x^5 \\)", "\\( x^{15} \\)", "\\( x^4 \\)"],
+            answer: 0
+        },
+        {
+            q: "What is the y-intercept of the line given by the equation \\( 3x - 2y = 12 \\)?",
+            options: ["-6", "6", "-4", "4"],
+            answer: 0
         }
     ];
 
