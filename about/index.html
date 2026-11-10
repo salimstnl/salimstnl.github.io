@@ -6,6 +6,7 @@
     <title>About | Stanley Salim</title>
     <meta name="description" content="Biography, academic trajectory, research interests, and featured interviews of Stanley Salim.">
     
+    <!-- Google Fonts & FontAwesome -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
@@ -15,31 +16,79 @@
     <link rel="icon" type="image/png" href="../images/logo.png">
 
     <style>
-        /* Custom Enhancements for About Page */
+        /* Uniform Background Override */
+        body, main, .section { background-color: var(--bg-main) !important; }
         
-        /* Stats Ribbon */
-        .stats-ribbon { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin: 3rem 0; padding: 2rem; background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 12px; }
+        /* Upgraded About Layout */
+        .about-hero-grid { 
+            display: grid; 
+            grid-template-columns: 1.2fr 0.8fr; 
+            gap: 4rem; 
+            align-items: center; 
+            margin-bottom: 4rem;
+        }
+        
+        @media (max-width: 900px) {
+            .about-hero-grid { grid-template-columns: 1fr; text-align: center; }
+        }
+
+        .profile-wrapper { 
+            position: relative; 
+            border-radius: 12px; 
+            padding: 1rem; 
+            background: rgba(255,255,255,0.02); 
+            border: 1px solid var(--border); 
+        }
+        
+        .profile-wrapper img { 
+            width: 100%; 
+            border-radius: 8px; 
+            display: block; 
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5);
+        }
+
+        .button-group-center {
+            display: flex; 
+            gap: 1.5rem; 
+            justify-content: center; 
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .ikigai-quote {
+            border-left: 4px solid var(--accent); 
+            padding-left: 1.5rem; 
+            margin: 2rem 0; 
+            font-family: var(--font-serif); 
+            font-size: 1.3rem; 
+            color: var(--text-main); 
+            font-style: italic; 
+        }
+
+        /* Stats Ribbon Upgrade */
+        .stats-ribbon { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+            gap: 1.5rem; 
+            padding: 2.5rem; 
+            background: rgba(255,255,255,0.02); 
+            border: 1px solid var(--border); 
+            border-radius: 12px; 
+            margin-bottom: 5rem;
+        }
+        
         .stat-item { text-align: center; }
         .stat-value { font-size: 1.8rem; font-weight: 700; color: var(--accent); font-family: var(--font-serif); margin-bottom: 0.5rem; }
         .stat-label { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
-
-        /* Vitademy SaaS Preview Cards */
+        
+        /* Vitademy Species Card */
         .emerald-card { border-top: 3px solid #50C878 !important; background: linear-gradient(145deg, var(--surface) 80%, rgba(80, 200, 120, 0.05) 100%); }
         .emerald-card:hover { box-shadow: 0 10px 30px rgba(80, 200, 120, 0.2); transform: translateY(-5px); transition: all 0.3s ease; }
-        .cta-card { background: linear-gradient(145deg, var(--surface) 0%, rgba(255,255,255,0.02) 100%); border-top: 3px solid var(--text-main); }
-        .cta-card:hover { transform: translateY(-5px); transition: all 0.3s ease; }
-        
-        /* Profile Image Polish */
-        .profile-wrapper { position: relative; border-radius: 12px; padding: 1rem; background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 100%); border: 1px solid var(--border); }
-        .profile-wrapper img { width: 100%; border-radius: 8px; display: block; filter: grayscale(20%) contrast(110%); transition: all 0.5s ease; }
-        .profile-wrapper:hover img { filter: grayscale(0%) contrast(100%); }
-        
-        /* Quote Block */
-        .ikigai-block { border-left: 4px solid var(--accent); padding-left: 1.5rem; margin: 2rem 0; font-family: var(--font-serif); font-size: 1.2rem; color: var(--text-main); font-style: italic; }
     </style>
 </head>
 <body>
 
+    <!-- Mobile Navigation Drawer Overlay -->
     <div class="nav-overlay" id="navOverlay"></div>
 
     <nav>
@@ -55,7 +104,7 @@
                 <a href="/blog/">Blog</a>
                 <a href="/publication/">Publication</a>
                 <a href="/about/" class="active">About</a>
-                <a href="../docs/cv.pdf" target="_blank" class="btn-outline">View CV</a>
+                <!-- View CV button successfully removed as requested -->
             </div>
 
             <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
@@ -65,108 +114,101 @@
     </nav>
 
     <!-- Main Content -->
-    <main style="padding-top: 130px;">
-        
-        <!-- Bio Section -->
-        <section class="section">
-            <div class="container">
-                <div class="about-grid" style="align-items: center;">
-                    <div class="about-text">
-                        <h1 class="section-title">The Guy Behind All This</h1>
-                        <p class="section-subtitle" style="margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 2px; font-size: 0.85rem;">Mathematician • Founder • Educator</p>
-                        
-                        <div class="ikigai-block">
-                            "The most powerful art is that of learning."
-                        </div>
-                        
-                        <p style="margin-bottom: 1rem; color: var(--text-muted); line-height: 1.8;">From mentoring peers to coaching top-tier Science Olympiad talents, I have observed how differently minds process complex logic. This fascination with cognitive mapping led me to found <strong>Vitademy</strong>, an EdTech venture built to leverage the hidden potential within students and professionals.</p>
-                        
-                        <p style="margin-bottom: 1rem; color: var(--text-muted); line-height: 1.8;">At my core, I am a pure mathematician. My time at the Budapest University of Technology and Economics (BME) cemented my drive to pursue mathematical physics and theoretical research.</p>
-                        
-                        <p style="color: var(--text-muted); line-height: 1.8;">My ultimate goal is to bridge these two worlds: translating rigorous pure research into accessible, applied digital platforms that democratise human learning.</p>
-
-                        <div style="margin-top: 2.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
-                            <a href="../docs/resume.pdf" target="_blank" class="btn-primary">
-                                <i class="fas fa-file-alt"></i> View Resume
-                            </a>
-                            <a href="mailto:stanley.salim@hotmail.com" class="btn-outline">
-                                <i class="fas fa-envelope"></i> Get in Touch
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="about-image profile-wrapper">
-                        <img src="../images/profile.jpeg" alt="Stanley Salim" onerror="this.src='https://via.placeholder.com/400x500/1e1e24/C1B1FC?text=Stanley+Salim'">
-                    </div>
-                </div>
-
-                <!-- Academic Pedigree Stats Ribbon -->
-                <div class="stats-ribbon">
-                    <div class="stat-item">
-                        <div class="stat-value">4.45 / 5.00</div>
-                        <div class="stat-label">BSc Mathematics (BME)</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">HMS</div>
-                        <div class="stat-label">Homological Mirror Symmetry</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">Vitademy</div>
-                        <div class="stat-label">SaaS Architecture & EdTech</div>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- Vitademy SaaS Preview Section (Integrated from Chevening Strategy) -->
-        <section id="vitademy-preview" class="section bg-darker" style="padding: 6rem 0;">
-            <div class="container">
-                <div class="center-text">
-                    <h2 class="section-title">The Art of Learning, Mapped</h2>
-                    <p class="section-subtitle" style="text-transform: none; letter-spacing: normal;">I built Vitademy to translate human cognition into actionable data. Here is my personal cognitive mapping.</p>
-                </div>
-                
-                <div class="about-grid" style="grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3rem;">
+    <main class="section" style="padding-top: 130px;">
+        <div class="container">
+            
+            <!-- Bio Section Upgrade -->
+            <div class="about-hero-grid">
+                <div class="about-text">
+                    <h1 class="section-title">About Me</h1>
+                    <p class="section-subtitle" style="margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 2px; font-size: 0.85rem;">Mathematician • Founder of Vitademy • Educator</p>
                     
-                    <!-- The Emerald Species Visual Card -->
-                    <div class="card visual-card emerald-card" style="padding: 2.5rem; text-align: center; border-radius: 12px; display: flex; flex-direction: column;">
-                        <img src="../images/vitademy.png" alt="Emerald Cognitive Species" style="max-width: 100%; height: auto; border-radius: 8px; margin-bottom: 1.5rem; border: 1px solid rgba(80, 200, 120, 0.2);" onerror="this.src='https://via.placeholder.com/600x350/1e1e24/50C878?text=Emerald+Species'">
-                        <h3 style="color: #50C878; margin-bottom: 0.5rem;"><i class="fas fa-brain"></i> My Species: Emerald (G-L-I)</h3>
-                        <p style="color: var(--text-main); font-weight: 600; margin-bottom: 1rem; font-size: 0.9rem;">Profile: The Systems Architect</p>
-                        <p style="text-align: left; color: var(--text-muted); line-height: 1.7; flex-grow: 1;">As an Emerald, my cognitive mapping relies on abstract visualization and deep pattern recognition over rote memorization. This framework allows me to dissect complex theorems into manageable visual parts.</p>
-                        <a href="../docs/5cd.pdf" target="_blank" class="btn-outline" style="display: block; margin-top: 2rem; border-color: #50C878; color: #50C878;">
-                            <i class="fas fa-file-pdf"></i> Read the White Paper
-                        </a>
+                    <div class="ikigai-quote">
+                        "The most powerful art is that of learning."[cite: 14]
                     </div>
-
-                    <!-- The Assessment Call-to-Action -->
-                    <div class="card visual-card cta-card" style="padding: 2.5rem; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; border-radius: 12px;">
-                        <h3 style="margin-bottom: 1rem; font-size: 1.8rem;">What's Your Species?</h3>
-                        <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 2.5rem; max-width: 80%;">Take the 10-minute algorithmic assessment to evaluate your 5 cognitive dimensions and discover your personalized learning framework.</p>
-                        <a href="https://vitademy.space" target="_blank" class="btn-primary" style="padding: 1rem 2.5rem; font-size: 1.1rem; box-shadow: 0 10px 20px -10px var(--accent);">Take Free Assessment &rarr;</a>
+                    
+                    <p style="margin-bottom: 1.2rem; color: var(--text-muted); line-height: 1.8;">From mentoring peers to coaching top-tier Science Olympiad (OSN) talents, I have observed how differently minds process complex logic. This fascination with cognitive mapping led me to found <strong>Vitademy</strong>, an EdTech venture built to leverage the hidden potential within students and professionals.</p>
+                    
+                    <p style="margin-bottom: 1.2rem; color: var(--text-muted); line-height: 1.8;">At my core, I am a mathematician. My time at the Budapest University of Technology and Economics (BME), graduating with a GPA of 4.45/5.00[cite: 14], cemented my drive to pursue theoretical pure research and mathematical physics.</p>
+                    
+                    <p style="color: var(--text-muted); line-height: 1.8;">My ultimate goal is to bridge these two worlds: translating rigorous pure research into accessible, applied digital platforms that empower human learning.</p>
+                    
+                    <div class="research-interests" style="margin-top: 2rem; padding-left: 1rem; border-left: 2px solid var(--border);">
+                        <strong style="color: var(--text-main);">Research Interests:</strong> <span style="color: var(--text-muted);">Algebraic Geometry, Symplectic Topology, Homological Mirror Symmetry, and Complex Dynamics.</span>[cite: 14]
                     </div>
+                </div>
 
+                <div class="profile-wrapper">
+                    <img src="../images/about-profile.jpeg" alt="Stanley Salim" onerror="this.src='https://via.placeholder.com/400x500/1e1e24/C1B1FC?text=Stanley+Salim'">
                 </div>
             </div>
-        </section>
 
-        <!-- Featured Media Section -->
-        <section class="section" style="padding: 6rem 0;">
-            <div class="container">
-                <div class="center-text">
-                    <h2 class="section-title">Featured Media</h2>
-                    <p class="section-subtitle">Budapest University of Technology and Economics International Feature.</p>
+            <!-- Centered Buttons -->
+            <div class="button-group-center">
+                <a href="../docs/resume.pdf" target="_blank" class="btn-primary" style="padding: 1rem 2.5rem; font-size: 1.05rem; font-weight: 600;">
+                    <i class="fas fa-file-alt" style="margin-right: 8px;"></i> View Resume
+                </a>
+                <a href="mailto:stanley.salim@hotmail.com" class="btn-primary" style="padding: 1rem 2.5rem; font-size: 1.05rem; font-weight: 600;">
+                    <i class="fas fa-envelope" style="margin-right: 8px;"></i> Get in Touch
+                </a>
+            </div>
+
+            <div class="section-divider" style="margin: 5rem auto;"></div>
+
+            <!-- Stats Ribbon (Surprise Upgrade) -->
+            <div class="stats-ribbon">
+                <div class="stat-item">
+                    <div class="stat-value">4.45 / 5.00</div>
+                    <div class="stat-label">BSc Mathematics (BME)[cite: 14]</div>
                 </div>
-
-                <div style="max-width: 900px; margin: 3rem auto 0 auto;">
-                    <div class="video-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 16px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.8);">
-                        <iframe src="https://www.youtube.com/embed/HcQY-3EQJ-w?si=bohU8-o2t5zD2cRS" title="BME Student Feature Interview" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position: absolute; top:0; left:0; width:100%; height:100%;"></iframe>
-                    </div>
+                <div class="stat-item">
+                    <div class="stat-value">HMS</div>
+                    <div class="stat-label">Homological Mirror Symmetry[cite: 14]</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">Vitademy</div>
+                    <div class="stat-label">VitaTest & VitaQuant[cite: 14]</div>
                 </div>
             </div>
-        </section>
 
+            <!-- Cognitive Mapping Feature -->
+            <div class="center-text">
+                <h2 class="section-title">Mapping How I Think</h2>
+                <p class="section-subtitle">Cognitive species framework powering Vitademy.</p>
+            </div>
+
+            <div class="about-grid" style="grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3rem;">
+                <div class="card visual-card emerald-card" style="padding: 2.5rem; text-align: center; border-radius: 12px; display: flex; flex-direction: column;">
+                    <img src="../images/about-species.jpg" alt="Emerald Cognitive Species" style="max-width: 100%; height: auto; border-radius: 8px; margin-bottom: 1.5rem; border: 1px solid rgba(80, 200, 120, 0.2);" onerror="this.src='https://via.placeholder.com/600x350/1e1e24/50C878?text=Emerald+Species'">
+                    <h3 style="color: #50C878; margin-bottom: 0.5rem;"><i class="fas fa-brain"></i> My Species: Emerald (G-L-I)[cite: 14]</h3>
+                    <p style="text-align: left; font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; flex-grow: 1;">As an Emerald, my cognitive mapping relies on abstract visualization and deep pattern recognition over rote memorization. This framework allows me to dissect complex theorems into manageable visual parts.</p>
+                    <a href="../docs/5cd.pdf" target="_blank" class="btn-outline" style="display: block; margin-top: 2rem; border-color: #50C878; color: #50C878;">
+                        <i class="fas fa-file-pdf"></i> Read the White Paper
+                    </a>
+                </div>
+
+                <div class="card visual-card" style="padding: 2.5rem; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; border-radius: 12px; border: 1px solid var(--border);">
+                    <h3 style="margin-bottom: 1rem; font-size: 1.8rem;">What's Yours?</h3>
+                    <p style="margin-bottom: 2.5rem; color: var(--text-muted); line-height: 1.7;">Take the 10-minute assessment to evaluate your 5 cognitive dimensions and discover your personalized learning framework.</p>
+                    <a href="https://vitademy.space" target="_blank" class="btn-primary" style="padding: 1rem 2.5rem; font-size: 1.1rem;">Take Free Assessment &rarr;</a>
+                </div>
+            </div>
+
+            <div class="section-divider" style="margin: 5rem auto;"></div>
+
+            <!-- Featured BME Interview -->
+            <div class="center-text">
+                <h2 class="section-title">Featured Media</h2>
+                <p class="section-subtitle">Budapest University of Technology and Economics International Student Feature.</p>
+            </div>
+
+            <div style="max-width: 900px; margin: 3rem auto 0 auto;">
+                <div class="video-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.8);">
+                    <iframe src="https://www.youtube.com/embed/HcQY-3EQJ-w?si=bohU8-o2t5zD2cRS" title="BME Student Feature Interview" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position: absolute; top:0; left:0; width:100%; height:100%;"></iframe>
+                </div>
+            </div>
+
+        </div>
     </main>
 
     <footer>
