@@ -256,6 +256,53 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Execute the fetch function
     loadLatestCoursesToHome();
+
+        /* ----------------------------------------------------------------------
+       Automatic Blog Sync (Fetches latest 3 blogs for Homepage)
+       ---------------------------------------------------------------------- */
+    async function loadLatestBlogsToHome() {
+        const homeBlogGrid = document.getElementById('home-blog-grid');
+        if (!homeBlogGrid) return;
+    
+        try {
+            const response = await fetch('/blog/index.html');
+            const htmlText = await response.text();
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(htmlText, 'text/html');
+            
+            // Find all blog cards and extract the first 3 (Assuming blog/index.html is default sorted newest-first)
+            const allBlogs = doc.querySelectorAll('.blog-item');
+            const latestBlogs = Array.from(allBlogs).slice(0, 3);
+            
+            homeBlogGrid.innerHTML = '';
+            
+            latestBlogs.forEach(blog => {
+                const btn = blog.querySelector('button');
+                
+                if (btn) {
+                    const linkObj = document.createElement('a');
+                    linkObj.className = btn.className; 
+                    linkObj.href = '/blog/';
+                    linkObj.innerHTML = 'Read Article &rarr;';
+                    linkObj.style.textDecoration = 'none';
+                    linkObj.style.display = 'inline-block';
+                    linkObj.style.textAlign = 'center';
+                    btn.replaceWith(linkObj);
+                }
+                
+                homeBlogGrid.appendChild(blog);
+            });
+            
+        } catch (error) {
+            console.error('Failed to sync blogs from blog page:', error);
+            homeBlogGrid.innerHTML = '<p style="text-align: center; color: var(--wrong); grid-column: 1 / -1;">Failed to load articles. Please visit the Blog page.</p>';
+        }
+    }
+    
+    // Make sure to call this alongside your course sync
+    document.addEventListener('DOMContentLoaded', () => {
+        // loadLatestCoursesToHome(); // Assuming this is already here
+        loadLatestBlogsToHome();
+    });
 });
