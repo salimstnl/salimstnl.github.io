@@ -6,7 +6,6 @@
     <title>Publications & Projects | Stanley Salim</title>
     <meta name="description" content="Explore research papers, books, startup software, and mathematical codebases by Stanley Salim.">
     
-    <!-- Google Fonts & FontAwesome -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
@@ -14,21 +13,41 @@
     
     <link rel="stylesheet" href="../style.css">
     <link rel="icon" type="image/png" href="../images/logo.png">
+
+    <style>
+        /* Shared Search & Filter Styles */
+        .search-input { padding: 0.8rem 1.2rem; background: var(--surface); border: 1px solid var(--border); color: var(--text-main); border-radius: 8px; font-family: var(--font-sans); font-size: 0.9rem; outline: none; transition: border-color 0.3s ease; width: 100%; }
+        .search-input:focus { border-color: var(--accent); }
+        .search-row { display: flex; gap: 1rem; width: 100%; max-width: 600px; }
+        
+        .filter-tags-container { display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center; align-items: center; margin-top: 1rem; }
+        .filter-tag { background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border); color: var(--text-muted); padding: 0.4rem 1rem; border-radius: 20px; cursor: pointer; transition: all 0.2s ease; font-size: 0.85rem; font-family: var(--font-sans); user-select: none; }
+        .filter-tag:hover { background: rgba(255, 255, 255, 0.1); color: var(--text-main); }
+        .filter-tag.active { background: var(--accent); color: var(--bg-darker); border-color: var(--accent); font-weight: 600; }
+
+        .card-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.8rem; }
+        .pub-tag { padding: 0.25rem 0.6rem; border-radius: 6px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+        
+        /* Publication Specific Tag Colours */
+        .tag-book { background: rgba(234, 179, 8, 0.15); color: #eab308; } /* Yellow */
+        .tag-saas { background: rgba(14, 165, 233, 0.15); color: #0ea5e9; } /* Sky Blue */
+        .tag-research { background: rgba(239, 68, 68, 0.15); color: #ef4444; } /* Red */
+        .tag-code { background: rgba(34, 197, 94, 0.15); color: #22c55e; } /* Green */
+        .tag-media { background: rgba(168, 85, 247, 0.15); color: #a855f7; } /* Purple */
+
+        /* Override card styles for no-thumbnail look */
+        .pub-item .card-content { padding: 2rem; display: flex; flex-direction: column; height: 100%; }
+        .pub-date { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem; display: block; font-family: var(--font-serif); font-style: italic; }
+        .w-100 { width: 100%; text-align: center; margin-top: auto; }
+    </style>
 </head>
 <body>
 
-    <!-- Mobile Navigation Drawer Overlay -->
-    <div class="nav-overlay" id="navOverlay"></div>
-
-    <!-- Navigation Bar -->
     <nav>
         <div class="nav-content">
-            <a href="/" class="logo">
-                <img src="../images/logo.png" alt="Stanley Salim Logo" class="nav-logo-img">
-            </a>
-            
+            <a href="/" class="logo"><img src="../images/logo.png" alt="Stanley Salim Logo" class="nav-logo-img"></a>
             <div class="nav-links" id="navLinks">
-                <button class="nav-close-btn" id="navCloseBtn" aria-label="Close menu">&times;</button>
+                <button class="nav-close-btn" id="navCloseBtn">&times;</button>
                 <a href="/">Home</a>
                 <a href="/teaching/">Teaching</a>
                 <a href="/blog/">Blog</a>
@@ -36,14 +55,10 @@
                 <a href="/about/">About</a>
                 <a href="../docs/cv.pdf" target="_blank" class="btn-outline">View CV</a>
             </div>
-
-            <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
-                <i class="fas fa-bars"></i>
-            </button>
+            <button class="hamburger" id="hamburgerBtn"><i class="fas fa-bars"></i></button>
         </div>
     </nav>
 
-    <!-- Main Content -->
     <main class="section" style="padding-top: 130px;">
         <div class="container">
             <div class="center-text">
@@ -51,100 +66,175 @@
                 <p class="section-subtitle">Chronological archive of research, books, startup architecture, and software codebases.</p>
             </div>
 
-            <div class="timeline" style="margin-top: 4rem;">
+            <!-- Search, Sort & Filter Bar -->
+            <div class="filter-bar" style="margin-top: 2rem; display: flex; flex-direction: column; align-items: center;">
+                <div class="search-row">
+                    <input type="text" id="pubSearch" placeholder="Search projects or publications..." class="search-input" onkeyup="filterAndSortPubs()" style="flex-grow: 1;">
+                    <select id="pubSort" class="search-input" onchange="filterAndSortPubs()" style="width: auto; cursor: pointer;">
+                        <option value="newest">Newest to Oldest</option>
+                        <option value="oldest">Oldest to Newest</option>
+                        <option value="title">Title (A-Z)</option>
+                    </select>
+                </div>
                 
-                <!-- Project 1 -->
-                <div class="timeline-item left">
-                    <div class="timeline-content card">
-                        <span class="timeline-year">2026 • Book Chapter</span>
-                        <h3>Book: "Entropi Diaspora"</h3>
-                        <p class="book-subtitle" style="color: var(--accent); font-style: italic; font-size: 0.9rem; margin-bottom: 0.5rem;">Dari Partikel Gagasan Menuju Sinergi Bangsa</p>
-                        <p>Co-authored book examining diaspora contributions, pure mathematics prestige, and building national educational synergy.</p>
-                        <a href="https://aramediaindonesia.com/books/3347/" target="_blank" class="card-link">View Publisher Listing &rarr;</a>
-                    </div>
+                <div id="pubTagFilters" class="filter-tags-container">
+                    <button class="filter-tag" data-value="book" onclick="togglePubTag(this)">Books & Essays</button>
+                    <button class="filter-tag" data-value="research" onclick="togglePubTag(this)">Academic Research</button>
+                    <button class="filter-tag" data-value="saas" onclick="togglePubTag(this)">SaaS & Architecture</button>
+                    <button class="filter-tag" data-value="code" onclick="togglePubTag(this)">Codebases</button>
+                    <button class="filter-tag" data-value="media" onclick="togglePubTag(this)">Science Communication</button>
                 </div>
+            </div>
 
-                <!-- Project 2 -->
-                <div class="timeline-item right">
-                    <div class="timeline-content card">
-                        <span class="timeline-year">2026 • SaaS Architecture</span>
-                        <h3>Vitademy Engine: VitaTest & VitaQuant</h3>
-                        <p>Architected data-driven EdTech tools evaluating 5 cognitive dimensions to classify users into 32 distinct learning profiles and map personalized productivity curves.</p>
-                        <a href="https://vitademy.space" target="_blank" class="card-link">Visit Vitademy Platform &rarr;</a>
+            <div class="visual-grid-3" id="pubGrid" style="margin-top: 3rem;">
+                
+                <!-- Pub 1 -->
+                <article class="card visual-card hover-scale pub-item" data-tags="book" data-date="2026-01-01" data-title="Book: Entropi Diaspora" style="display: flex; flex-direction: column;">
+                    <div class="card-content">
+                        <div class="card-tags">
+                            <span class="pub-tag tag-book">Book Chapter</span>
+                        </div>
+                        <span class="pub-date">2026</span>
+                        <h3 class="pub-title" style="margin-bottom: 0.5rem;">"Entropi Diaspora"</h3>
+                        <p style="color: var(--accent); font-style: italic; font-size: 0.9rem; margin-bottom: 0.5rem;">Dari Partikel Gagasan Menuju Sinergi Bangsa</p>
+                        <p class="pub-desc" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Co-authored book examining diaspora contributions, pure mathematics prestige, and building national educational synergy.[cite: 1]</p>
+                        <a href="https://aramediaindonesia.com/books/3347/" target="_blank" class="btn-primary w-100">View Publisher Listing &rarr;</a>
                     </div>
-                </div>
+                </article>
 
-                <!-- Project 3 -->
-                <div class="timeline-item left">
-                    <div class="timeline-content card">
-                        <span class="timeline-year">2023 • BSc Thesis</span>
-                        <h3>Lyapunov Exponents of Random Matrix Products</h3>
-                        <p>Conducted independent undergraduate research under Prof. Károly Simon at the Budapest University of Technology and Economics evaluating numerical convergence of matrix products.</p>
-                        <a href="../docs/cv.pdf" target="_blank" class="card-link">Read Thesis Abstract &rarr;</a>
+                <!-- Pub 2 -->
+                <article class="card visual-card hover-scale pub-item" data-tags="saas" data-date="2026-01-02" data-title="Vitademy Engine: VitaTest & VitaQuant" style="display: flex; flex-direction: column;">
+                    <div class="card-content">
+                        <div class="card-tags">
+                            <span class="pub-tag tag-saas">SaaS Architecture</span>
+                        </div>
+                        <span class="pub-date">2026</span>
+                        <h3 class="pub-title" style="margin-bottom: 0.5rem;">Vitademy Engine: VitaTest & VitaQuant</h3>
+                        <p class="pub-desc" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Architected data-driven EdTech tools evaluating 5 cognitive dimensions to classify users into 32 distinct learning profiles and map personalized productivity curves.</p>
+                        <a href="https://vitademy.space" target="_blank" class="btn-primary w-100">Visit Platform &rarr;</a>
                     </div>
-                </div>
+                </article>
 
-                <!-- Project 4 -->
-                <div class="timeline-item right">
-                    <div class="timeline-content card">
-                        <span class="timeline-year">2023 • Mathematical Codebase</span>
-                        <h3>Matrix Lie Groups & Lie Algebras</h3>
-                        <p>Implemented numerical computational notebooks and independent research on matrix Lie groups, Lie algebra representations, and exponential maps under Dr. Szilárd Szabó.</p>
-                        <a href="https://github.com/salimstnl/bme-lietheory" target="_blank" class="card-link">View GitHub Repository &rarr;</a>
+                <!-- Pub 3 -->
+                <article class="card visual-card hover-scale pub-item" data-tags="research" data-date="2023-08-07" data-title="Lyapunov Exponents of Random Matrix Products" style="display: flex; flex-direction: column;">
+                    <div class="card-content">
+                        <div class="card-tags">
+                            <span class="pub-tag tag-research">BSc Thesis</span>
+                        </div>
+                        <span class="pub-date">August 2023</span>
+                        <h3 class="pub-title" style="margin-bottom: 0.5rem;">Lyapunov Exponents of Random Matrix Products</h3>
+                        <p class="pub-desc" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Conducted independent undergraduate research under Prof. Károly Simon at the Budapest University of Technology and Economics evaluating numerical convergence of matrix products.[cite: 1, 14]</p>
+                        <a href="../docs/cv.pdf" target="_blank" class="btn-primary w-100">Read Thesis Abstract &rarr;</a>
                     </div>
-                </div>
+                </article>
 
-                <!-- Project 5 -->
-                <div class="timeline-item left">
-                    <div class="timeline-content card">
-                        <span class="timeline-year">2023 • Python Repository</span>
-                        <h3>Recursive Fractal Generation</h3>
-                        <p>Programmed recursive fractal generation algorithms in Python and interactive Colab notebooks for visual dynamic system analysis.</p>
-                        <a href="https://github.com/salimstnl/bme-fractal" target="_blank" class="card-link">View GitHub Repository &rarr;</a>
+                <!-- Pub 4 -->
+                <article class="card visual-card hover-scale pub-item" data-tags="code research" data-date="2023-06-01" data-title="Matrix Lie Groups & Lie Algebras" style="display: flex; flex-direction: column;">
+                    <div class="card-content">
+                        <div class="card-tags">
+                            <span class="pub-tag tag-code">Mathematical Codebase</span>
+                        </div>
+                        <span class="pub-date">Spring 2023</span>
+                        <h3 class="pub-title" style="margin-bottom: 0.5rem;">Matrix Lie Groups & Lie Algebras</h3>
+                        <p class="pub-desc" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Implemented numerical computational notebooks and independent research on matrix Lie groups, Lie algebra representations, and exponential maps under Dr. Szilárd Szabó.[cite: 1, 14]</p>
+                        <a href="https://github.com/salimstnl/bme-lietheory" target="_blank" class="btn-primary w-100">View GitHub &rarr;</a>
                     </div>
-                </div>
+                </article>
 
-                <!-- Project 6 -->
-                <div class="timeline-item right">
-                    <div class="timeline-content card">
-                        <span class="timeline-year">2021 • Philosophy Essay</span>
-                        <h3>Art vs. Science: What Exactly is Mathematics?</h3>
-                        <p>Undergraduate essay examining whether mathematics should be classified as a natural science, a branch of the humanities, or a pure art form.</p>
-                        <a href="../docs/art-vs-science.pdf" target="_blank" class="card-link">Download PDF Essay &rarr;</a>
+                <!-- Pub 5 -->
+                <article class="card visual-card hover-scale pub-item" data-tags="code" data-date="2023-05-01" data-title="Recursive Fractal Generation" style="display: flex; flex-direction: column;">
+                    <div class="card-content">
+                        <div class="card-tags">
+                            <span class="pub-tag tag-code">Python Repository</span>
+                        </div>
+                        <span class="pub-date">Spring 2023</span>
+                        <h3 class="pub-title" style="margin-bottom: 0.5rem;">Recursive Fractal Generation</h3>
+                        <p class="pub-desc" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Programmed recursive fractal generation algorithms in Python and interactive Colab notebooks for visual dynamic system analysis.[cite: 1]</p>
+                        <a href="https://github.com/salimstnl/bme-fractal" target="_blank" class="btn-primary w-100">View GitHub &rarr;</a>
                     </div>
-                </div>
+                </article>
 
-                <!-- Project 7 -->
-                <div class="timeline-item left">
-                    <div class="timeline-content card">
-                        <span class="timeline-year">Ongoing • Science Communication</span>
-                        <h3>YouTube Expositions & Masterclasses</h3>
-                        <p>Producing public video masterclasses and mathematical expositions to democratize elite quantitative thinking across Indonesia.</p>
-                        <a href="https://youtube.com/@salimstnl" target="_blank" class="card-link">Explore Channel &rarr;</a>
+                <!-- Pub 6 -->
+                <article class="card visual-card hover-scale pub-item" data-tags="book" data-date="2021-12-05" data-title="Art vs. Science: What Exactly is Mathematics?" style="display: flex; flex-direction: column;">
+                    <div class="card-content">
+                        <div class="card-tags">
+                            <span class="pub-tag tag-book">Philosophy Essay</span>
+                        </div>
+                        <span class="pub-date">December 2021</span>
+                        <h3 class="pub-title" style="margin-bottom: 0.5rem;">Art vs. Science: What Exactly is Mathematics?</h3>
+                        <p class="pub-desc" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Undergraduate essay examining whether mathematics should be classified as a natural science, a branch of the humanities, or a pure art form.[cite: 1]</p>
+                        <a href="../docs/art-vs-science.pdf" target="_blank" class="btn-primary w-100">Download PDF &rarr;</a>
                     </div>
-                </div>
+                </article>
+
+                <!-- Pub 7 -->
+                <article class="card visual-card hover-scale pub-item" data-tags="media" data-date="2026-12-31" data-title="YouTube Expositions & Masterclasses" style="display: flex; flex-direction: column;">
+                    <div class="card-content">
+                        <div class="card-tags">
+                            <span class="pub-tag tag-media">Science Communication</span>
+                        </div>
+                        <span class="pub-date">Ongoing</span>
+                        <h3 class="pub-title" style="margin-bottom: 0.5rem;">YouTube Expositions & Masterclasses</h3>
+                        <p class="pub-desc" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Producing public video masterclasses and mathematical expositions to democratize elite quantitative thinking across Indonesia.[cite: 1]</p>
+                        <a href="https://youtube.com/@salimstnl" target="_blank" class="btn-primary w-100">Explore Channel &rarr;</a>
+                    </div>
+                </article>
 
             </div>
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container footer-content">
-            <p class="copyright">&copy; 2026 Stanley Salim. All rights reserved.</p>
-            <div class="social-links">
-                <a href="https://linkedin.com/in/salimstnl" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                <a href="https://github.com/salimstnl" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                <a href="https://youtube.com/@salimstnl" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                <a href="https://instagram.com/salimstnl" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="https://tiktok.com/@salimstnl" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
-                <a href="https://x.com/salimstnl" target="_blank" aria-label="X (Twitter)"><i class="fab fa-x-twitter"></i></a>
-                <a href="https://discord.gg/crkmpnsUzm" target="_blank" aria-label="Vitademy Discord"><i class="fab fa-discord"></i></a>
-                <a href="mailto:stanley.salim@hotmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
-            </div>
-        </div>
-    </footer>
-
     <script src="../script.js"></script>
+    <script>
+        function togglePubTag(btn) {
+            btn.classList.toggle('active');
+            filterAndSortPubs();
+        }
+
+        function filterAndSortPubs() {
+            const searchInput = document.getElementById('pubSearch').value.toLowerCase();
+            const sortMethod = document.getElementById('pubSort').value;
+            const activeTags = Array.from(document.querySelectorAll('.filter-tag.active')).map(t => t.dataset.value.toLowerCase());
+            
+            const grid = document.getElementById('pubGrid');
+            const pubs = Array.from(grid.querySelectorAll('.pub-item'));
+
+            // 1. Filter
+            pubs.forEach(pub => {
+                const title = pub.dataset.title.toLowerCase();
+                const desc = pub.querySelector('.pub-desc').innerText.toLowerCase();
+                const tags = pub.dataset.tags.toLowerCase();
+
+                const matchesSearch = title.includes(searchInput) || desc.includes(searchInput);
+                const matchesTag = activeTags.length === 0 || activeTags.every(tag => tags.includes(tag));
+
+                if (matchesSearch && matchesTag) {
+                    pub.style.display = 'flex';
+                } else {
+                    pub.style.display = 'none';
+                }
+            });
+
+            // 2. Sort
+            pubs.sort((a, b) => {
+                if (sortMethod === 'newest') {
+                    return new Date(b.dataset.date) - new Date(a.dataset.date);
+                } else if (sortMethod === 'oldest') {
+                    return new Date(a.dataset.date) - new Date(b.dataset.date);
+                } else if (sortMethod === 'title') {
+                    return a.dataset.title.localeCompare(b.dataset.title);
+                }
+                return 0;
+            });
+
+            // Re-append to DOM in sorted order
+            pubs.forEach(pub => grid.appendChild(pub));
+        }
+        
+        // Initial sort on load
+        document.addEventListener('DOMContentLoaded', () => {
+            filterAndSortPubs();
+        });
+    </script>
 </body>
 </html>
