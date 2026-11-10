@@ -45,16 +45,22 @@
 
     <nav>
         <div class="nav-content">
-            <a href="/" class="logo"><img src="../images/logo.png" alt="Stanley Salim Logo" class="nav-logo-img"></a>
+            <a href="/" class="logo">
+                <img src="../images/logo.png" alt="Stanley Salim Logo" class="nav-logo-img">
+            </a>
+            
             <div class="nav-links" id="navLinks">
-                <button class="nav-close-btn" id="navCloseBtn">&times;</button>
+                <button class="nav-close-btn" id="navCloseBtn" aria-label="Close menu">&times;</button>
                 <a href="/">Home</a>
                 <a href="/teaching/">Teaching</a>
                 <a href="/blog/" class="active">Blog</a>
                 <a href="/publication/">Publication</a>
                 <a href="/about/">About</a>
             </div>
-            <button class="hamburger" id="hamburgerBtn"><i class="fas fa-bars"></i></button>
+
+            <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </nav>
 
